@@ -1,0 +1,9 @@
+# command: "C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe" "C:\Users\<user>\Research center\HeartSense_repro\run_code\nhanes_cleaning_step1.py"
+# cwd: C:\Users\<user>\Research center\HeartSense_repro
+# start: 2026-11-05T15:17:21.026378
+
+Original Shape: (15560, 282)
+After Removing >70% Missing Columns: (15560, 173)
+Saved: C:\Users\<user>\Research center\HeartSense_repro\data\nhanes\nhanes_cleaned_step1.csv
+
+# end: 2026-11-05T15:17:22.279728  duration_s: 1.3  exit_code: 0

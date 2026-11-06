@@ -1,0 +1,5 @@
+model,FP,FN
+Proposed,50487,16975
+LightGBM,4421,36777
+CNN1D,108803,8011
+Simple Avg Fusion,37835,20464

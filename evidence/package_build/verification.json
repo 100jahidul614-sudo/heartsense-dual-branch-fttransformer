@@ -1,0 +1,421 @@
+{
+  "stages_json_steps_identical": true,
+  "original_code_scripts": 19,
+  "files_copied_from_private_folders": 186,
+  "files_sanitised": 75,
+  "path_replacements_total": 487,
+  "sanitisation_reversible_all_files": true,
+  "original_code": [
+    {
+      "script": "original_code/FP/FN_bar_chart.py",
+      "lines": 90,
+      "lines_changed": 3,
+      "changed_lines": [
+        8,
+        9,
+        10
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/artifacts/phase2_fttf_allfeatures_normal/plot_grouped_metrics.py",
+      "lines": 82,
+      "lines_changed": 1,
+      "changed_lines": [
+        9
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/brfss2024_phase1_feature_fusion_cache_builder.py",
+      "lines": 581,
+      "lines_changed": 2,
+      "changed_lines": [
+        57,
+        59
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/brfss2024_phase2_all_models_allfeatures_master.py",
+      "lines": 980,
+      "lines_changed": 2,
+      "changed_lines": [
+        105,
+        107
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py",
+      "lines": 1073,
+      "lines_changed": 3,
+      "changed_lines": [
+        48,
+        52,
+        55
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/confusion_metrix_allmodel.py",
+      "lines": 274,
+      "lines_changed": 4,
+      "changed_lines": [
+        12,
+        13,
+        15,
+        16
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/generate_dataset_summary.py",
+      "lines": 133,
+      "lines_changed": 2,
+      "changed_lines": [
+        9,
+        13
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/heatmap.py",
+      "lines": 52,
+      "lines_changed": 1,
+      "changed_lines": [
+        6
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/nhanes_baseline_comparison_models.py",
+      "lines": 604,
+      "lines_changed": 3,
+      "changed_lines": [
+        57,
+        60,
+        62
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/nhanes_cleaning_step1.py",
+      "lines": 30,
+      "lines_changed": 2,
+      "changed_lines": [
+        7,
+        26
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/nhanes_confusion_matrix_comparison_plot.py",
+      "lines": 200,
+      "lines_changed": 1,
+      "changed_lines": [
+        9
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/nhanes_create_target.py",
+      "lines": 73,
+      "lines_changed": 2,
+      "changed_lines": [
+        7,
+        69
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/nhanes_merge_check.py",
+      "lines": 51,
+      "lines_changed": 1,
+      "changed_lines": [
+        6
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/nhanes_phase1_feature_fusion_cache_builder.py",
+      "lines": 696,
+      "lines_changed": 2,
+      "changed_lines": [
+        41,
+        43
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/nhanes_phase2_run_fttransformer_dualbranch_precbiased_gate.py",
+      "lines": 1499,
+      "lines_changed": 3,
+      "changed_lines": [
+        46,
+        56,
+        59
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/plot_calibration_brier_ece.py",
+      "lines": 173,
+      "lines_changed": 2,
+      "changed_lines": [
+        14,
+        15
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/plot_threshold_curve.py",
+      "lines": 80,
+      "lines_changed": 2,
+      "changed_lines": [
+        9,
+        10
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/simple_Avarage_fusion.py",
+      "lines": 32,
+      "lines_changed": 3,
+      "changed_lines": [
+        5,
+        6,
+        7
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    },
+    {
+      "script": "original_code/update_master_table_add_experiment.py",
+      "lines": 263,
+      "lines_changed": 5,
+      "changed_lines": [
+        13,
+        16,
+        17,
+        18,
+        21
+      ],
+      "only_user_path_lines_changed": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true
+    }
+  ],
+  "original_code_all_ok": true,
+  "hyperparameters_and_seeds": {
+    "brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py": {
+      "constants": {
+        "DEFAULT_TARGET": "_MICHD",
+        "DEFAULT_LEAKAGE_COLS": [
+          "CVDINFR4",
+          "CVDCRHD4"
+        ],
+        "DEFAULT_PHASE1_STABILITY_CSV": "",
+        "DEFAULT_N_SPLITS": 5,
+        "DEFAULT_SEED": 42,
+        "DEFAULT_MIN_FOLDS_KEEP": 1,
+        "DEFAULT_MAX_EPOCHS": 30,
+        "DEFAULT_PATIENCE": 6,
+        "DEFAULT_VAL_FRACTION": 0.1,
+        "DEFAULT_BATCH_SIZE": 1024,
+        "DEFAULT_LR": 0.0003,
+        "DEFAULT_WEIGHT_DECAY": 1e-05,
+        "DEFAULT_D_EMBED": 48,
+        "DEFAULT_N_HEADS": 4,
+        "DEFAULT_N_LAYERS": 2,
+        "DEFAULT_FFN_MULT": 4,
+        "DEFAULT_DROPOUT": 0.08,
+        "DEFAULT_VAL_BATCH_SIZE": 512,
+        "DEFAULT_USE_AMP": true,
+        "DEFAULT_SCALER": "standard",
+        "DEFAULT_PREC_NEG_WEIGHT": 4.0,
+        "DEFAULT_ALPHA_POS": 1.3,
+        "DEFAULT_USE_FOCAL": 0,
+        "DEFAULT_FOCAL_GAMMA": 2.0,
+        "DEFAULT_LABEL_SMOOTH": 0.0,
+        "DEFAULT_PREC_TEMPERATURE": 1.0,
+        "DEFAULT_GATE_EPOCHS": 6,
+        "DEFAULT_GATE_LR": 0.005,
+        "DEFAULT_GATE_WEIGHT_DECAY": 0.0,
+        "DEFAULT_GATE_BATCH_SIZE": 4096,
+        "DEFAULT_GATE_HIDDEN": 16,
+        "DEFAULT_GATE_BIAS": 0.9,
+        "DEFAULT_VETO_V": 0.2,
+        "DEFAULT_RESCUE_RHI": 0.98
+      },
+      "identical_to_private_original": true
+    },
+    "nhanes_phase2_run_fttransformer_dualbranch_precbiased_gate.py": {
+      "constants": {
+        "DEFAULT_TARGET": "CVD_TARGET",
+        "DEFAULT_LEAKAGE_COLS": [
+          "MCQ160B",
+          "MCQ160C",
+          "MCQ160D",
+          "MCQ160E"
+        ],
+        "DEFAULT_PHASE1_STABILITY_CSV": "",
+        "DEFAULT_N_SPLITS": 5,
+        "DEFAULT_SEED": 42,
+        "DEFAULT_MIN_FOLDS_KEEP": 1,
+        "DEFAULT_MAX_EPOCHS": 30,
+        "DEFAULT_PATIENCE": 6,
+        "DEFAULT_VAL_FRACTION": 0.1,
+        "DEFAULT_BATCH_SIZE": 512,
+        "DEFAULT_LR": 0.0003,
+        "DEFAULT_WEIGHT_DECAY": 1e-05,
+        "DEFAULT_D_EMBED": 48,
+        "DEFAULT_N_HEADS": 4,
+        "DEFAULT_N_LAYERS": 2,
+        "DEFAULT_FFN_MULT": 4,
+        "DEFAULT_DROPOUT": 0.08,
+        "DEFAULT_VAL_BATCH_SIZE": 512,
+        "DEFAULT_USE_AMP": true,
+        "DEFAULT_SCALER": "standard",
+        "DEFAULT_PREC_NEG_WEIGHT": 4.0,
+        "DEFAULT_ALPHA_POS": 1.3,
+        "DEFAULT_USE_FOCAL": 0,
+        "DEFAULT_FOCAL_GAMMA": 2.0,
+        "DEFAULT_LABEL_SMOOTH": 0.0,
+        "DEFAULT_PREC_TEMPERATURE": 1.0,
+        "DEFAULT_GATE_EPOCHS": 6,
+        "DEFAULT_GATE_LR": 0.005,
+        "DEFAULT_GATE_WEIGHT_DECAY": 0.0,
+        "DEFAULT_GATE_BATCH_SIZE": 2048,
+        "DEFAULT_GATE_HIDDEN": 16,
+        "DEFAULT_GATE_BIAS": 0.9,
+        "DEFAULT_VETO_V": 0.2,
+        "DEFAULT_RESCUE_RHI": 0.98
+      },
+      "identical_to_private_original": true
+    },
+    "brfss2024_phase1_feature_fusion_cache_builder.py": {
+      "constants": {
+        "RUN_WITH_DEFAULTS": true,
+        "DEFAULT_TARGET": "_MICHD",
+        "DEFAULT_N_SPLITS": 5,
+        "DEFAULT_SEED": 42,
+        "DEFAULT_PEARSON_ABS_R_THRESHOLD": 0.08,
+        "DEFAULT_LEAKAGE_COLS": [
+          "CVDINFR4",
+          "CVDCRHD4"
+        ],
+        "DEFAULT_TABNET_MAX_EPOCHS": 30,
+        "DEFAULT_TABNET_BATCH_SIZE": 8192,
+        "DEFAULT_TABNET_VBATCH_SIZE": 8192,
+        "DEFAULT_TABNET_BASELINE_ALPHA": 0.75,
+        "DEFAULT_PI_REPEATS": 5,
+        "DEFAULT_PI_SAMPLE_SIZE": 30000,
+        "DEFAULT_PI_N_JOBS": 1,
+        "DEFAULT_HGB_LCB_LAMBDA": 1.7,
+        "DEFAULT_HGB_MIN_MARGIN": 0.0002
+      },
+      "identical_to_private_original": true
+    },
+    "nhanes_phase1_feature_fusion_cache_builder.py": {
+      "constants": {
+        "RUN_WITH_DEFAULTS": true,
+        "DEFAULT_TARGET": "CVD_TARGET",
+        "DEFAULT_N_SPLITS": 5,
+        "DEFAULT_SEED": 42,
+        "DEFAULT_PEARSON_ABS_R_THRESHOLD": 0.08,
+        "DEFAULT_LEAKAGE_COLS": [
+          "MCQ160B",
+          "MCQ160C",
+          "MCQ160D",
+          "MCQ160E"
+        ],
+        "DEFAULT_TABNET_MAX_EPOCHS": 30,
+        "DEFAULT_TABNET_BATCH_SIZE": 2048,
+        "DEFAULT_TABNET_VBATCH_SIZE": 512,
+        "DEFAULT_TABNET_BASELINE_ALPHA": 0.75,
+        "DEFAULT_PI_REPEATS": 5,
+        "DEFAULT_PI_SAMPLE_SIZE": 9000,
+        "DEFAULT_PI_N_JOBS": 1,
+        "DEFAULT_HGB_LCB_LAMBDA": 1.7,
+        "DEFAULT_HGB_MIN_MARGIN": 0.0002
+      },
+      "identical_to_private_original": true
+    },
+    "brfss2024_phase2_all_models_allfeatures_master.py": {
+      "constants": {
+        "RUN_WITH_DEFAULTS": true,
+        "DEFAULT_TARGET": "_MICHD",
+        "DEFAULT_N_SPLITS": 5,
+        "DEFAULT_SEED": 42,
+        "DEFAULT_LEAKAGE_COLS": [
+          "CVDINFR4",
+          "CVDCRHD4"
+        ],
+        "DEFAULT_SCALER": "standard",
+        "DEFAULT_DL_EPOCHS": 10,
+        "DEFAULT_DL_BATCH": 2048,
+        "DEFAULT_DL_LR": 0.002,
+        "DEFAULT_DL_PATIENCE": 3,
+        "DEFAULT_USE_AMP": 1
+      },
+      "identical_to_private_original": true
+    },
+    "nhanes_baseline_comparison_models.py": {
+      "constants": {
+        "TARGET": "CVD_TARGET",
+        "LEAKAGE_COLS": [
+          "MCQ160B",
+          "MCQ160C",
+          "MCQ160D",
+          "MCQ160E"
+        ],
+        "N_SPLITS": 5,
+        "SEED": 42,
+        "CNN_MAX_EPOCHS": 30,
+        "CNN_PATIENCE": 6,
+        "CNN_BATCH_SIZE": 512,
+        "CNN_LR": 0.0003,
+        "CNN_WEIGHT_DECAY": 1e-05,
+        "CNN_VAL_FRACTION": 0.1
+      },
+      "identical_to_private_original": true
+    }
+  },
+  "regenerate_verified_run_copies_byte_identical": "14/14",
+  "regenerated_path_change_log_equals_verified": true,
+  "path_lines_changed_in_verified_runs": 27,
+  "package_run_code_equals_tool_output_for_placeholder_root": "14/14",
+  "portability": {
+    "windows:D:\\review\\heartsense": {
+      "copies": 14,
+      "path_lines_changed": 29,
+      "all_compile": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true,
+      "placeholder_or_user_left": []
+    },
+    "posix:/home/reviewer/heartsense": {
+      "copies": 14,
+      "path_lines_changed": 29,
+      "all_compile": true,
+      "syntax_tree_matches_after_path_literal_normalisation": true,
+      "placeholder_or_user_left": []
+    }
+  }
+}

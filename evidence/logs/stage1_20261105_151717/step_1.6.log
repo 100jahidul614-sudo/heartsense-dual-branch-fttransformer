@@ -1,0 +1,55 @@
+# command: "C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe" "C:\Users\<user>\Research center\HeartSense_repro\run_code\nhanes_baseline_comparison_models.py"
+# cwd: C:\Users\<user>\Research center\HeartSense_repro
+# start: 2026-11-05T15:19:49.000474
+
+======================================================
+NHANES Baseline Comparison
+======================================================
+[INFO] Raw dataset shape: (9180, 174)
+[INFO] Dropping leakage columns: ['MCQ160B', 'MCQ160C', 'MCQ160D', 'MCQ160E']
+[INFO] Dropping participant ID: SEQN
+[INFO] Dropping all-NaN columns: 1
+[INFO] Dropping constant columns: 3
+[INFO] Phase-1 selected features used: 141 / 141
+[INFO] Final X shape: (9180, 141)
+[INFO] Class distribution: {0: np.int64(8305), 1: np.int64(875)}
+
+==================== FOLD 1/5 ====================
+[LightGBM] F1=0.4868 | P=0.5000 | R=0.4743 | AUROC=0.8762 | AUPRC=0.4739 | FP=83 | FN=92
+[Random Forest] F1=0.1683 | P=0.6296 | R=0.0971 | AUROC=0.8841 | AUPRC=0.4487 | FP=10 | FN=158
+[CNN] F1=0.2209 | P=0.1270 | R=0.8457 | AUROC=0.7193 | AUPRC=0.2358 | FP=1017 | FN=27
+
+==================== FOLD 2/5 ====================
+[LightGBM] F1=0.4140 | P=0.4226 | R=0.4057 | AUROC=0.8570 | AUPRC=0.3988 | FP=97 | FN=104
+[Random Forest] F1=0.2095 | P=0.6286 | R=0.1257 | AUROC=0.8684 | AUPRC=0.4289 | FP=13 | FN=153
+[CNN] F1=0.2685 | P=0.1669 | R=0.6857 | AUROC=0.7351 | AUPRC=0.2174 | FP=599 | FN=55
+
+==================== FOLD 3/5 ====================
+[LightGBM] F1=0.4522 | P=0.5108 | R=0.4057 | AUROC=0.8575 | AUPRC=0.4292 | FP=68 | FN=104
+[Random Forest] F1=0.1212 | P=0.5217 | R=0.0686 | AUROC=0.8630 | AUPRC=0.3923 | FP=11 | FN=163
+[CNN] F1=0.2978 | P=0.1957 | R=0.6229 | AUROC=0.7610 | AUPRC=0.2514 | FP=448 | FN=66
+
+==================== FOLD 4/5 ====================
+[LightGBM] F1=0.4862 | P=0.5267 | R=0.4514 | AUROC=0.8961 | AUPRC=0.5018 | FP=71 | FN=96
+[Random Forest] F1=0.2115 | P=0.6667 | R=0.1257 | AUROC=0.8977 | AUPRC=0.4755 | FP=11 | FN=153
+[CNN] F1=0.3075 | P=0.1951 | R=0.7257 | AUROC=0.7795 | AUPRC=0.2471 | FP=524 | FN=48
+
+==================== FOLD 5/5 ====================
+[LightGBM] F1=0.4587 | P=0.4934 | R=0.4286 | AUROC=0.8848 | AUPRC=0.4815 | FP=77 | FN=100
+[Random Forest] F1=0.1117 | P=0.5000 | R=0.0629 | AUROC=0.8860 | AUPRC=0.4338 | FP=11 | FN=164
+[CNN] F1=0.3172 | P=0.2134 | R=0.6171 | AUROC=0.7710 | AUPRC=0.2531 | FP=398 | FN=67
+
+======================================================
+FINAL POOLED BASELINE RESULTS
+======================================================
+        Model      ACC   BalAcc  Precision   Recall       F1    AUROC    AUPRC   FP  FN
+     LightGBM 0.902832 0.692730   0.489032 0.433143 0.459394 0.873910 0.452224  396 496
+Random Forest 0.907734 0.544629   0.600000 0.096000 0.165517 0.879426 0.428484   56 791
+          CNN 0.646078 0.669943   0.170094 0.699429 0.273642 0.740500 0.227088 2986 263
+
+[SAVE] C:\Users\<user>\Research center\HeartSense_repro\runs\nhanes\nhanes_baseline_comparison\nhanes_baseline_comparison_results.csv
+[SAVE] C:\Users\<user>\Research center\HeartSense_repro\runs\nhanes\nhanes_baseline_comparison\nhanes_baseline_comparison_confmats.csv
+[SAVE] C:\Users\<user>\Research center\HeartSense_repro\runs\nhanes\nhanes_baseline_comparison\nhanes_baseline_oof_probabilities.csv
+[DONE] NHANES baseline comparison completed.
+
+# end: 2026-11-05T15:20:10.818688  duration_s: 21.8  exit_code: 0

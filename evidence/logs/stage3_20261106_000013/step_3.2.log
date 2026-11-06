@@ -1,0 +1,8 @@
+# command: "C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe" "C:\Users\<user>\Research center\HeartSense_repro\original_code\update_master_table_add_experiment.py" --master_csv "C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures\master_results_phase2_allfeatures.csv" --metrics_csv "C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_fttf_dual_precbiased_gate_selectedfeatures\phase2_fttf_dual_precbiased_gate_selectedfeatures_metrics.csv" --confmat_csv "C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_fttf_dual_precbiased_gate_selectedfeatures\phase2_fttf_dual_precbiased_gate_selectedfeatures_confmat_050.csv" --oof_csv "C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_fttf_dual_precbiased_gate_selectedfeatures\phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv" --summary_json "C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_fttf_dual_precbiased_gate_selectedfeatures\phase2_fttf_dual_precbiased_gate_selectedfeatures_summary.json" --model FTTF_Dual_Head --feature_set phase1_final_features_allfolds
+# cwd: C:\Users\<user>\Research center\HeartSense_repro
+# start: 2026-11-06T01:12:05.054022
+
+[OK] Master table updated: C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures\master_results_phase2_allfeatures.csv
+[ADDED] model=FTTF_Dual_Head | FP=50487 | FN=16975 | TP=25363 | TN=359639
+
+# end: 2026-11-06T01:12:05.643521  duration_s: 0.6  exit_code: 0

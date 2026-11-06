@@ -1,0 +1,17 @@
+reproduced,status,detail
+runs/brfss/phase1_feature_fusion/brfss2024_phase2_run_fttransformer_dualbranch_ugf.py,REFERENCE_ONLY,script stored in an output folder; not produced by this pipeline
+runs/brfss/phase1_feature_fusion/feature_stability.csv,IDENTICAL,283 rows x 2 cols
+runs/brfss/phase1_feature_fusion/final_features_allfolds.json,IDENTICAL,
+runs/brfss/phase1_feature_fusion/final_features_allfolds.json.py,REFERENCE_ONLY,script stored in an output folder; not produced by this pipeline
+runs/brfss/phase1_feature_fusion/final_features_stable.json,REFERENCE_ONLY,exploratory copy of the Phase-1 list (same 181 features); not written by the Phase-1 script
+runs/brfss/phase1_feature_fusion/fold_selected_features.json,IDENTICAL,
+runs/brfss/phase1_feature_fusion/paper_tables/dataset_summary_brfss2024_phase2.csv,IDENTICAL,1 rows x 9 cols
+runs/brfss/phase1_feature_fusion/phase1_summary.json,MATCH_1e-4,only absolute paths differ
+runs/brfss/phase1_feature_fusion/selector_overlap_table.csv,IDENTICAL,5 rows x 14 cols
+runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/ablation/ablation_confmats.csv,IDENTICAL,5 rows x 5 cols
+runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/ablation/ablation_oof_components.csv,IDENTICAL,452464 rows x 6 cols
+runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/ablation/ablation_results.csv,IDENTICAL,5 rows x 8 cols
+runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_confmat_050.csv,IDENTICAL,2 rows x 3 cols
+runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_metrics.csv,IDENTICAL,7 rows x 20 cols
+runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv,IDENTICAL,452464 rows x 7 cols
+runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_summary.json,MATCH_1e-4,only absolute paths differ

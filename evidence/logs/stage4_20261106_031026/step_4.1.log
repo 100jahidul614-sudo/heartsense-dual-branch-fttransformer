@@ -1,0 +1,11 @@
+# command: "C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe" "C:\Users\<user>\Research center\HeartSense_repro\run_code\simple_Avarage_fusion.py"
+# cwd: C:\Users\<user>\Research center\HeartSense_repro
+# start: 2026-11-06T03:10:29.090077
+
+FP: 37835
+FN: 20464
+Precision: 0.3663434323133866
+Recall: 0.516651707685767
+F1: 0.428704420512117
+
+# end: 2026-11-06T03:10:30.476796  duration_s: 1.4  exit_code: 0

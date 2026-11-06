@@ -1,0 +1,25 @@
+{
+  "copied": {
+    "original_script": 19,
+    "nhanes_xpt": 18,
+    "reference_output": 92,
+    "run_copy": 14
+  },
+  "path_lines_changed": 27,
+  "scripts_with_path_changes": [
+    "FN_bar_chart.py",
+    "brfss2024_phase2_all_models_allfeatures_master.py",
+    "confusion_metrix_allmodel.py",
+    "generate_dataset_summary.py",
+    "heatmap.py",
+    "nhanes_baseline_comparison_models.py",
+    "nhanes_cleaning_step1.py",
+    "nhanes_confusion_matrix_comparison_plot.py",
+    "nhanes_create_target.py",
+    "nhanes_merge_check.py",
+    "plot_calibration_brier_ece.py",
+    "plot_grouped_metrics.py",
+    "plot_threshold_curve.py",
+    "simple_Avarage_fusion.py"
+  ]
+}

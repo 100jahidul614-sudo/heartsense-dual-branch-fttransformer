@@ -1,0 +1,12 @@
+reproduced,status,detail
+runs/brfss/confusion_matrix_comparison/confusion_matrix_all_models.pdf,IMAGE_DIFFERS,informational: compare visually
+runs/brfss/confusion_matrix_comparison/confusion_matrix_all_models.png,IDENTICAL,same bytes
+runs/brfss/confusion_matrix_comparison/confusion_matrix_counts_all_models.csv,IDENTICAL,5 rows x 5 cols
+runs/brfss/FP/fp_fn_bar_chart.png,IDENTICAL,same bytes
+runs/brfss/FP/fp_fn_plot_data.csv,IDENTICAL,4 rows x 3 cols
+runs/brfss/threshold_analysis/threshold_error_curve.png,IDENTICAL,same bytes
+runs/brfss/threshold_analysis/threshold_prf_curve.png,IDENTICAL,same bytes
+runs/brfss/threshold_heatmap/threshold_heatmap_f1.png,IDENTICAL,same bytes
+runs/brfss/calibration_analysis/calibration_metrics_brier_ece.csv,MATCH_1e-4,max|diff|=2.38e-12 (column brier); text cells differing=0; 0.50-decision flips=0
+runs/brfss/calibration_analysis/calibration_plot_bins15.png,IDENTICAL,same bytes
+runs/brfss/calibration_analysis/probability_histograms.png,IDENTICAL,same bytes

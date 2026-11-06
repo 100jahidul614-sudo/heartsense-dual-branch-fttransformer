@@ -1,0 +1,34 @@
+{
+  "dataset": "NHANES 2017-March 2020 Pre-pandemic",
+  "target": "CVD_TARGET",
+  "target_definition": "CVD_TARGET = 1 if any of MCQ160B/MCQ160C/MCQ160D/MCQ160E indicated cardiovascular disease history; otherwise 0.",
+  "leakage_columns_removed": [
+    "MCQ160B",
+    "MCQ160C",
+    "MCQ160D",
+    "MCQ160E"
+  ],
+  "n_splits": 5,
+  "seed": 42,
+  "final_rule": "Union across folds of per-fold final sets; no stability filtering.",
+  "pearson_abs_r_threshold": 0.08,
+  "tabnet_importance_threshold": "0.75*(1/N_features)",
+  "tabnet_baseline_alpha": 0.75,
+  "hgb_permutation_threshold": "(mu - 1.7*sigma) > 0.0002",
+  "pi_repeats": 5,
+  "pi_sample_size": 9000,
+  "pi_n_jobs": 1,
+  "clean_feature_count_before_selection": 163,
+  "samples": 9180,
+  "class_distribution": {
+    "0": 8305,
+    "1": 875
+  },
+  "final_allfolds_feature_count": 141,
+  "final_allfolds_features_path": "C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\nhanes\\nhanes_phase1_feature_fusion\\final_features_allfolds.json",
+  "overlap_table_path": "C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\nhanes\\nhanes_phase1_feature_fusion\\selector_overlap_table.csv",
+  "fold_selected_features_path": "C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\nhanes\\nhanes_phase1_feature_fusion\\fold_selected_features.json",
+  "stability_table_path": "C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\nhanes\\nhanes_phase1_feature_fusion\\feature_stability.csv",
+  "hgb_lcb_lambda": 1.7,
+  "hgb_min_margin": 0.0002
+}

@@ -1,0 +1,12 @@
+﻿
+
+Name          : Intel(R) Graphics
+DriverVersion : 32.0.101.8826
+AdapterRAM    : 2147479552
+
+Name          : NVIDIA GeForce RTX 5070 Ti Laptop GPU
+DriverVersion : 32.0.15.9191
+AdapterRAM    : 4293918720
+
+
+

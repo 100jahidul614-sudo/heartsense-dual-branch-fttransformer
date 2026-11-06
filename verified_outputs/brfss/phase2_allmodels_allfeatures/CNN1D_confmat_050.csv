@@ -1,0 +1,2 @@
+model,threshold,tn,fp,fn,tp
+CNN1D,0.5,301323,108803,8011,34327

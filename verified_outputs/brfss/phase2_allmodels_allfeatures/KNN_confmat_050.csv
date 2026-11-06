@@ -1,0 +1,2 @@
+model,threshold,tn,fp,fn,tp
+KNN,0.5,409887,239,41955,383

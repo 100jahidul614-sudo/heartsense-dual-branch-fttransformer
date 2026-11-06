@@ -1,0 +1,6 @@
+Variant,TN,FP,FN,TP
+Recall head only,6679,1626,193,682
+Precision head only,7856,449,466,409
+Simple average fusion,7361,944,302,573
+GateNet only (no veto/rescue),7626,679,374,501
+GateNet + veto/rescue (final),7626,679,374,501

@@ -1,0 +1,88 @@
+{
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12",
+  "libs": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.9"
+  },
+  "verify_package_as_shipped": "PASS",
+  "make_run_copies_posix": "OK",
+  "verify_package_after_regeneration": "PASS",
+  "stage1_preflight_without_data": {
+    "exit_code": 2,
+    "stops": [
+      "- 1.1: input not found and not produced earlier in this stage: data/nhanes/P_DEMO.xpt",
+      "- 1.1: input not found and not produced earlier in this stage: data/nhanes/P_MCQ.xpt"
+    ]
+  },
+  "stage2_preflight_without_data": {
+    "exit_code": 2,
+    "stops": [
+      "- raw BRFSS file missing: <package copy>/data/brfss/main_data_brfss_2024.XPT (see DATA.md)",
+      "- 2.1: input not found and not produced earlier in this stage: {BRFSS_XPT}",
+      "- 2.2: input not found and not produced earlier in this stage: {BRFSS_XPT}",
+      "- 2.3: input not found and not produced earlier in this stage: {BRFSS_XPT}"
+    ]
+  },
+  "stage3_preflight_without_data": {
+    "exit_code": 2,
+    "stops": [
+      "- raw BRFSS file missing: <package copy>/data/brfss/main_data_brfss_2024.XPT (see DATA.md)",
+      "- 3.1: input not found and not produced earlier in this stage: {BRFSS_XPT}",
+      "- 3.2: input not found and not produced earlier in this stage: runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_metrics.csv"
+    ]
+  },
+  "stage4_preflight_without_data": {
+    "exit_code": 2,
+    "stops": [
+      "- 4.1: input not found and not produced earlier in this stage: runs/brfss/phase2_allmodels_allfeatures/LightGBM_oof.csv",
+      "- 4.1: input not found and not produced earlier in this stage: runs/brfss/phase2_allmodels_allfeatures/RF_oof.csv",
+      "- 4.1: input not found and not produced earlier in this stage: runs/brfss/phase2_allmodels_allfeatures/CNN1D_oof.csv",
+      "- 4.2: input not found and not produced earlier in this stage: runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv"
+    ]
+  },
+  "run_step_4.3_FN_bar_chart": {
+    "exit_code": 0
+  },
+  "run_step_3.3_plot_grouped_metrics": {
+    "exit_code": 0
+  },
+  "fp_fn_plot_data.csv": {
+    "byte_identical": false,
+    "identical_ignoring_line_endings": true,
+    "values_identical": true
+  },
+  "fp_fn_bar_chart.png": {
+    "byte_identical": false,
+    "same_size": true,
+    "differing_pixels": 0,
+    "total_pixels": 5243815
+  },
+  "figure_grouped_metrics.png": {
+    "byte_identical": false,
+    "same_size": true,
+    "differing_pixels": 0,
+    "total_pixels": 7376730
+  },
+  "compare_outputs_stage4": {
+    "exit_code": 0,
+    "summary": [
+      "status",
+      "MISSING_IN_RUN    9",
+      "IMAGE_DIFFERS     1",
+      "IDENTICAL         1",
+      "                                                                   reproduced         status                          detail",
+      "       runs/brfss/confusion_matrix_comparison/confusion_matrix_all_models.pdf MISSING_IN_RUN                                "
+    ]
+  },
+  "published_vs_reproduced": {
+    "exit_code": 0,
+    "summary": [
+      "verified_vs_published: {'match': 179, 'differs': 10, 'match (truncated, not rounded)': 7, 'n/a': 4}",
+      "reproduced_vs_verified: {'not run': 116, 'identical': 84}"
+    ]
+  },
+  "verify_check_excluded_exit": 0,
+  "note": "Run on a copy of the package in a Linux sandbox on the author's computer, without the datasets and without a GPU: it exercises path generation, pre-flight checks, two plotting steps from shipped inputs, the comparison tools and the package checks. No model was trained."
+}

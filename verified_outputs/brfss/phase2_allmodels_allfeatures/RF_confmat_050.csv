@@ -1,0 +1,2 @@
+model,threshold,tn,fp,fn,tp
+RF,0.5,360940,49186,17919,24419

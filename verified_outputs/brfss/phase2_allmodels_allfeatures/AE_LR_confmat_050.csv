@@ -1,0 +1,2 @@
+model,threshold,tn,fp,fn,tp
+AE_LR,0.5,302786,107340,11275,31063

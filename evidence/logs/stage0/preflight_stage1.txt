@@ -1,0 +1,17 @@
+=== Stage 1: NHANES cohort: data build, Phase 1, proposed model, baselines, Fig 15
+  [1.1] Merge 18 NHANES modules on SEQN
+        python run_code/nhanes_merge_check.py   (cwd: .)
+  [1.2] Drop variables with >70% missing
+        python run_code/nhanes_cleaning_step1.py   (cwd: .)
+  [1.3] Build CVD_TARGET
+        python run_code/nhanes_create_target.py   (cwd: .)
+  [1.4] Phase 1 multi-selector feature fusion (NHANES)
+        python original_code/nhanes_phase1_feature_fusion_cache_builder.py --data_path data/nhanes/nhanes_final_with_target.csv --out_dir runs/nhanes/nhanes_phase1_feature_fusion   (cwd: .)
+  [1.5] Phase 2 dual-branch FT-Transformer + GateNet + veto/rescue (NHANES)
+        python original_code/nhanes_phase2_run_fttransformer_dualbranch_precbiased_gate.py --data_path data/nhanes/nhanes_final_with_target.csv --phase1_features_json runs/nhanes/nhanes_phase1_feature_fusion/final_features_allfolds.json --out_dir runs/nhanes/nhanes_phase2_fttf_dual_precbiased_gate_selectedfeatures   (cwd: .)
+  [1.6] NHANES baselines (LightGBM, RF, CNN)
+        python run_code/nhanes_baseline_comparison_models.py   (cwd: .)
+  [1.7] Fig 15 confusion-matrix grid (counts are typed into the script)
+        python run_code/nhanes_confusion_matrix_comparison_plot.py   (cwd: .)
+
+[OK] pre-flight passed: all inputs present, no output exists, all paths inside HeartSense_repro.

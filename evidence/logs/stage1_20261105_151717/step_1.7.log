@@ -1,0 +1,11 @@
+# command: "C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe" "C:\Users\<user>\Research center\HeartSense_repro\run_code\nhanes_confusion_matrix_comparison_plot.py"
+# cwd: C:\Users\<user>\Research center\HeartSense_repro
+# start: 2026-11-05T15:20:10.819690
+
+C:\Users\<user>\Research center\HeartSense_repro\run_code\nhanes_confusion_matrix_comparison_plot.py:198: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  plt.show()
+
+Saved figure to:
+C:\Users\<user>\Research center\HeartSense_repro\runs\nhanes\nhanes_figures\nhanes_confusion_matrix_grid_style.png
+
+# end: 2026-11-05T15:20:13.220070  duration_s: 2.4  exit_code: 0

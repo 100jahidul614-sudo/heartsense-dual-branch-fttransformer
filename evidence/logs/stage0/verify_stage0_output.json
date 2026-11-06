@@ -1,0 +1,13 @@
+{
+  "copies_checked": {
+    "original_script": 19,
+    "nhanes_xpt": 18,
+    "reference_output": 92,
+    "run_copy": 14
+  },
+  "path_lines_documented": 27,
+  "original_project_files_checked": 277,
+  "brfss_xpt_sha256_ok": true,
+  "result": "PASS",
+  "failures": []
+}

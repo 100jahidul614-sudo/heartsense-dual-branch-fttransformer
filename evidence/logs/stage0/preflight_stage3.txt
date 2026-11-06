@@ -1,0 +1,11 @@
+=== Stage 3: BRFSS-2024 baselines: 11 models (XGBoost/CatBoost skipped as in the original), master table, Fig 4
+[OK] raw BRFSS file SHA-256 verified (3.0s)
+  [3.1] All baseline models on all 283 numeric features
+        python run_code/brfss2024_phase2_all_models_allfeatures_master.py   (cwd: .)
+  [3.2] Add the proposed model's row (FTTF_Dual_Head) to the master table
+        python original_code/update_master_table_add_experiment.py --master_csv runs/brfss/phase2_allmodels_allfeatures/master_results_phase2_allfeatures.csv --metrics_csv runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_metrics.csv --confmat_csv runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_confmat_050.csv --oof_csv runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv --summary_json runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_summary.json --model FTTF_Dual_Head --feature_set phase1_final_features_allfolds   (cwd: .)
+  [3.3] Fig 4 grouped metrics
+        python run_code/plot_grouped_metrics.py   (cwd: .)
+
+[STOP] pre-flight failed:
+   - 3.2: input not found and not produced earlier in this stage: runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_metrics.csv

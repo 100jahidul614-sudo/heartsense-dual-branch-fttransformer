@@ -1,0 +1,2 @@
+model,threshold,tn,fp,fn,tp
+LSTM,0.5,310194,99932,10172,32166

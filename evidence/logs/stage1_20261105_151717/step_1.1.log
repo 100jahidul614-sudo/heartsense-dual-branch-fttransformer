@@ -1,0 +1,27 @@
+# command: "C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe" "C:\Users\<user>\Research center\HeartSense_repro\run_code\nhanes_merge_check.py"
+# cwd: C:\Users\<user>\Research center\HeartSense_repro
+# start: 2026-11-05T15:17:18.629223
+
+P_DEMO.xpt: (15560, 29)
+P_BMX.xpt: (14300, 22)
+P_BPXO.xpt: (11656, 12)
+P_BPQ.xpt: (10195, 11)
+P_DIQ.xpt: (14986, 28)
+P_MCQ.xpt: (14986, 63)
+P_PAQ.xpt: (9693, 17)
+P_SMQ.xpt: (11137, 16)
+P_ALB_CR.xpt: (13027, 8)
+P_BIOPRO.xpt: (10409, 41)
+P_CBC.xpt: (13772, 22)
+P_GHB.xpt: (10409, 2)
+P_GLU.xpt: (5090, 4)
+P_HDL.xpt: (12198, 3)
+P_HSCRP.xpt: (13772, 3)
+P_INS.xpt: (5090, 5)
+P_TCHOL.xpt: (12198, 3)
+P_TRIGLY.xpt: (5090, 10)
+
+Merged dataset shape: (15560, 282)
+Saved: C:\Users\<user>\Research center\HeartSense_repro\data\nhanes\nhanes_2017_2020_merged_raw.csv
+
+# end: 2026-11-05T15:17:21.026378  duration_s: 2.4  exit_code: 0

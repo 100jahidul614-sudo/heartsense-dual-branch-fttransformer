@@ -1,0 +1,28 @@
+# command: "C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe" "C:\Users\<user>\Research center\HeartSense_repro\run_code\FN_bar_chart.py"
+# cwd: C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\FP
+# start: 2026-11-06T03:10:33.015233
+
+
+Loaded Proposed:
+  Unnamed: 0  pred_0  pred_1
+0     true_0  359639   50487
+1     true_1   16975   25363
+
+Loaded LightGBM:
+      model  threshold      tn    fp     fn    tp
+0  LightGBM        0.5  405705  4421  36777  5561
+
+Loaded CNN1D:
+   model  threshold      tn      fp    fn     tp
+0  CNN1D        0.5  301323  108803  8011  34327
+
+Final plot data:
+               model      FP     FN
+0           Proposed   50487  16975
+1           LightGBM    4421  36777
+2              CNN1D  108803   8011
+3  Simple Avg Fusion   37835  20464
+C:\Users\<user>\Research center\HeartSense_repro\run_code\FN_bar_chart.py:90: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  plt.show()
+
+# end: 2026-11-06T03:10:33.678890  duration_s: 0.7  exit_code: 0

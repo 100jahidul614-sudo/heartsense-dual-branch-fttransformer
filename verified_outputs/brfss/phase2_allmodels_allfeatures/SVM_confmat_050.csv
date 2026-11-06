@@ -1,0 +1,2 @@
+model,threshold,tn,fp,fn,tp
+SVM,0.5,406509,3617,37495,4843

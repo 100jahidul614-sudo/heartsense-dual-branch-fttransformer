@@ -1,0 +1,9 @@
+# command: "C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe" "C:\Users\<user>\Research center\HeartSense_repro\run_code\plot_grouped_metrics.py"
+# cwd: C:\Users\<user>\Research center\HeartSense_repro
+# start: 2026-11-06T01:12:05.644515
+
+[SAVED] C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures\figure_grouped_metrics.png
+C:\Users\<user>\Research center\HeartSense_repro\run_code\plot_grouped_metrics.py:82: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  plt.show()
+
+# end: 2026-11-06T01:12:06.413636  duration_s: 0.8  exit_code: 0

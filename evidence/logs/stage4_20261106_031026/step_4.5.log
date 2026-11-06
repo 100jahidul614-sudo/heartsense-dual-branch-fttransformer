@@ -1,0 +1,8 @@
+# command: "C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe" "C:\Users\<user>\Research center\HeartSense_repro\run_code\heatmap.py"
+# cwd: C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\threshold_heatmap
+# start: 2026-11-06T03:10:43.332896
+
+C:\Users\<user>\Research center\HeartSense_repro\run_code\heatmap.py:52: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  plt.show()
+
+# end: 2026-11-06T03:10:47.650274  duration_s: 4.3  exit_code: 0

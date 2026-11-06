@@ -1,0 +1,2 @@
+model,threshold,tn,fp,fn,tp
+GRU,0.5,295697,114429,8582,33756

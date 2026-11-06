@@ -1,0 +1,19 @@
+{
+  "n_splits": 5,
+  "seed": 42,
+  "final_rule": "UNION across folds of per-fold final sets (no stability filtering; no duplicates)",
+  "pearson_abs_r_threshold": 0.08,
+  "tabnet_importance_threshold": "0.75*(1/N_features)",
+  "tabnet_baseline_alpha": 0.75,
+  "hgb_permutation_threshold": "(mu - 1.7*sigma) > 0.0002",
+  "pi_repeats": 5,
+  "pi_sample_size": 30000,
+  "pi_n_jobs": 1,
+  "final_allfolds_feature_count": 181,
+  "final_allfolds_features_path": "C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase1_feature_fusion\\final_features_allfolds.json",
+  "overlap_table_path": "C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase1_feature_fusion\\selector_overlap_table.csv",
+  "fold_selected_features_path": "C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase1_feature_fusion\\fold_selected_features.json",
+  "stability_table_path": "C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase1_feature_fusion\\feature_stability.csv",
+  "hgb_lcb_lambda": 1.7,
+  "hgb_min_margin": 0.0002
+}

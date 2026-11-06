@@ -1,0 +1,35 @@
+# command: "C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe" "C:\Users\<user>\Research center\HeartSense_repro\run_code\confusion_metrix_allmodel.py"
+# cwd: C:\Users\<user>\Research center\HeartSense_repro
+# start: 2026-11-06T03:10:30.477716
+
+Loading files...
+Proposed: C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_fttf_dual_precbiased_gate_selectedfeatures\phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv
+LightGBM: C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures\LightGBM_oof.csv
+Random Forest: C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures\RF_oof.csv
+CNN: C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures\CNN1D_oof.csv
+
+Validating alignment...
+
+Proposed
+TN=359,639  FP=50,487  FN=16,975  TP=25,363
+
+LightGBM
+TN=405,705  FP=4,421  FN=36,777  TP=5,561
+
+Random Forest
+TN=360,940  FP=49,186  FN=17,919  TP=24,419
+
+CNN
+TN=301,323  FP=108,803  FN=8,011  TP=34,327
+
+Simple Avg
+TN=372,291  FP=37,835  FN=20,464  TP=21,874
+C:\Users\<user>\Research center\HeartSense_repro\run_code\confusion_metrix_allmodel.py:265: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  plt.show()
+
+Saved files:
+C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\confusion_matrix_comparison\confusion_matrix_all_models.png
+C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\confusion_matrix_comparison\confusion_matrix_all_models.pdf
+C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\confusion_matrix_comparison\confusion_matrix_counts_all_models.csv
+
+# end: 2026-11-06T03:10:33.015233  duration_s: 2.5  exit_code: 0

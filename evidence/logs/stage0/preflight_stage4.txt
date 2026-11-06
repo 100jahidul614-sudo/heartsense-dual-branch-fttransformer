@@ -1,0 +1,23 @@
+=== Stage 4: BRFSS-2024 analyses from saved predictions (no training)
+  [4.1] 3-model simple average (LightGBM+RF+CNN1D), printed
+        python run_code/simple_Avarage_fusion.py   (cwd: .)
+  [4.2] Table 9 / Fig 7 pooled confusion matrices
+        python run_code/confusion_metrix_allmodel.py   (cwd: .)
+  [4.3] Fig 5 FP/FN bar chart (writes to its working folder)
+        python run_code/FN_bar_chart.py   (cwd: runs/brfss/FP)
+  [4.4] Figs 8-9 threshold curves
+        python run_code/plot_threshold_curve.py   (cwd: .)
+  [4.5] Fig 10 veto/rescue sensitivity heatmap (writes to its working folder)
+        python run_code/heatmap.py   (cwd: runs/brfss/threshold_heatmap)
+  [4.6] Table 12 / Fig 11 calibration
+        python run_code/plot_calibration_brier_ece.py   (cwd: .)
+
+[STOP] pre-flight failed:
+   - 4.1: input not found and not produced earlier in this stage: runs/brfss/phase2_allmodels_allfeatures/LightGBM_oof.csv
+   - 4.1: input not found and not produced earlier in this stage: runs/brfss/phase2_allmodels_allfeatures/RF_oof.csv
+   - 4.1: input not found and not produced earlier in this stage: runs/brfss/phase2_allmodels_allfeatures/CNN1D_oof.csv
+   - 4.2: input not found and not produced earlier in this stage: runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv
+   - 4.3: input not found and not produced earlier in this stage: runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_confmat_050.csv
+   - 4.4: input not found and not produced earlier in this stage: runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv
+   - 4.5: input not found and not produced earlier in this stage: runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/ablation/ablation_oof_components.csv
+   - 4.6: input not found and not produced earlier in this stage: runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures/phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv

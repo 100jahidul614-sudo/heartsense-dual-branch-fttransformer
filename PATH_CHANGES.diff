@@ -1,0 +1,109 @@
+=== original_code/nhanes_merge_check.py  ->  run_code/nhanes_merge_check.py  (1 line(s) changed)
+@@ line 6
+- DATA_DIR = r"C:\Users\<user>\Research center\Heartseanse2.0\Dataset2"  # change this
++ DATA_DIR = r"C:\Users\<user>\Research center\HeartSense_repro\data\nhanes"  # change this
+
+=== original_code/nhanes_cleaning_step1.py  ->  run_code/nhanes_cleaning_step1.py  (2 line(s) changed)
+@@ line 7
+-     r"C:\Users\<user>\Research center\Heartseanse2.0\Dataset2\nhanes_2017_2020_merged_raw.csv"
++     r"C:\Users\<user>\Research center\HeartSense_repro\data\nhanes\nhanes_2017_2020_merged_raw.csv"
+@@ line 26
+- output_path = r"C:\Users\<user>\Research center\Heartseanse2.0\Dataset2\nhanes_cleaned_step1.csv"
++ output_path = r"C:\Users\<user>\Research center\HeartSense_repro\data\nhanes\nhanes_cleaned_step1.csv"
+
+=== original_code/nhanes_create_target.py  ->  run_code/nhanes_create_target.py  (2 line(s) changed)
+@@ line 7
+-     r"C:\Users\<user>\Research center\Heartseanse2.0\Dataset2\nhanes_cleaned_step1.csv"
++     r"C:\Users\<user>\Research center\HeartSense_repro\data\nhanes\nhanes_cleaned_step1.csv"
+@@ line 69
+- output_path = r"C:\Users\<user>\Research center\Heartseanse2.0\Dataset2\nhanes_final_with_target.csv"
++ output_path = r"C:\Users\<user>\Research center\HeartSense_repro\data\nhanes\nhanes_final_with_target.csv"
+
+=== original_code/nhanes_baseline_comparison_models.py  ->  run_code/nhanes_baseline_comparison_models.py  (3 line(s) changed)
+@@ line 57
+- DATA_PATH = r"C:\Users\<user>\Research center\Heartseanse2.0\Dataset2\nhanes_final_with_target.csv"
++ DATA_PATH = r"C:\Users\<user>\Research center\HeartSense_repro\data\nhanes\nhanes_final_with_target.csv"
+@@ line 60
+- PHASE1_FEATURES_JSON = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\nhanes_phase1_feature_fusion\final_features_allfolds.json"
++ PHASE1_FEATURES_JSON = r"C:\Users\<user>\Research center\HeartSense_repro\runs\nhanes\nhanes_phase1_feature_fusion\final_features_allfolds.json"
+@@ line 62
+- OUT_DIR = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\nhanes_baseline_comparison"
++ OUT_DIR = r"C:\Users\<user>\Research center\HeartSense_repro\runs\nhanes\nhanes_baseline_comparison"
+
+=== original_code/nhanes_confusion_matrix_comparison_plot.py  ->  run_code/nhanes_confusion_matrix_comparison_plot.py  (1 line(s) changed)
+@@ line 9
+- OUT_DIR = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\nhanes_figures"
++ OUT_DIR = r"C:\Users\<user>\Research center\HeartSense_repro\runs\nhanes\nhanes_figures"
+
+=== original_code/generate_dataset_summary.py  ->  run_code/generate_dataset_summary.py  (1 line(s) changed)
+@@ line 13
+- FEATURES_JSON = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase1_feature_fusion\final_features_allfolds.json"
++ FEATURES_JSON = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase1_feature_fusion\final_features_allfolds.json"
+
+=== original_code/brfss2024_phase2_all_models_allfeatures_master.py  ->  run_code/brfss2024_phase2_all_models_allfeatures_master.py  (1 line(s) changed)
+@@ line 107
+- DEFAULT_OUT_DIR = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_allmodels_allfeatures"
++ DEFAULT_OUT_DIR = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures"
+
+=== original_code/artifacts/phase2_fttf_allfeatures_normal/plot_grouped_metrics.py  ->  run_code/plot_grouped_metrics.py  (1 line(s) changed)
+@@ line 9
+- path = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_allmodels_allfeatures\master_results_phase2_allfeatures.csv"
++ path = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures\master_results_phase2_allfeatures.csv"
+
+=== original_code/simple_Avarage_fusion.py  ->  run_code/simple_Avarage_fusion.py  (3 line(s) changed)
+@@ line 5
+- lgb = pd.read_csv(r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_allmodels_allfeatures\LightGBM_oof.csv")
++ lgb = pd.read_csv(r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures\LightGBM_oof.csv")
+@@ line 6
+- rf = pd.read_csv(r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_allmodels_allfeatures\RF_oof.csv")
++ rf = pd.read_csv(r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures\RF_oof.csv")
+@@ line 7
+- cnn = pd.read_csv(r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_allmodels_allfeatures\CNN1D_oof.csv")
++ cnn = pd.read_csv(r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures\CNN1D_oof.csv")
+
+=== original_code/confusion_metrix_allmodel.py  ->  run_code/confusion_metrix_allmodel.py  (4 line(s) changed)
+@@ line 12
+- PROPOSED_CSV = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_fttf_dual_precbiased_gate\phase2_fttf_dual_precbiased_gate_oof.csv"
++ PROPOSED_CSV = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_fttf_dual_precbiased_gate_selectedfeatures\phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv"
+@@ line 13
+- LIGHTGBM_CSV = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_allmodels_allfeatures\LightGBM_oof.csv"
++ LIGHTGBM_CSV = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures\LightGBM_oof.csv"
+@@ line 15
+- ALLMODELS_DIR = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_allmodels_allfeatures"
++ ALLMODELS_DIR = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures"
+@@ line 16
+- OUT_DIR = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\confusion_matrix_comparison"
++ OUT_DIR = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\confusion_matrix_comparison"
+
+=== original_code/FP/FN_bar_chart.py  ->  run_code/FN_bar_chart.py  (3 line(s) changed)
+@@ line 8
+- proposed_path = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_fttf_dual_precbiased_gate_selectedfeatures\phase2_fttf_dual_precbiased_gate_selectedfeatures_confmat_050.csv"
++ proposed_path = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_fttf_dual_precbiased_gate_selectedfeatures\phase2_fttf_dual_precbiased_gate_selectedfeatures_confmat_050.csv"
+@@ line 9
+- cnn_path = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_allmodels_allfeatures\CNN1D_confmat_050.csv"
++ cnn_path = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures\CNN1D_confmat_050.csv"
+@@ line 10
+- lgbm_path = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_allmodels_allfeatures\LightGBM_confmat_050.csv"
++ lgbm_path = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_allmodels_allfeatures\LightGBM_confmat_050.csv"
+
+=== original_code/plot_threshold_curve.py  ->  run_code/plot_threshold_curve.py  (2 line(s) changed)
+@@ line 9
+- OOF_PATH = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_fttf_dual_precbiased_gate\phase2_fttf_dual_precbiased_gate_oof.csv"
++ OOF_PATH = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_fttf_dual_precbiased_gate_selectedfeatures\phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv"
+@@ line 10
+- OUT_DIR = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\threshold_analysis"
++ OUT_DIR = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\threshold_analysis"
+
+=== original_code/heatmap.py  ->  run_code/heatmap.py  (1 line(s) changed)
+@@ line 6
+- df = pd.read_csv(r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_fttf_dual_precbiased_gate_selectedfeatures\ablation\ablation_oof_components.csv")
++ df = pd.read_csv(r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_fttf_dual_precbiased_gate_selectedfeatures\ablation\ablation_oof_components.csv")
+
+=== original_code/plot_calibration_brier_ece.py  ->  run_code/plot_calibration_brier_ece.py  (2 line(s) changed)
+@@ line 14
+- OOF_PATH = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\phase2_fttf_dual_precbiased_gate\phase2_fttf_dual_precbiased_gate_oof.csv"
++ OOF_PATH = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase2_fttf_dual_precbiased_gate_selectedfeatures\phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv"
+@@ line 15
+- OUT_DIR  = r"C:\Users\<user>\Research center\Heartseanse2.0\artifacts\calibration_analysis"
++ OUT_DIR  = r"C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\calibration_analysis"
+

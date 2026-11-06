@@ -1,0 +1,164 @@
+[
+  {
+    "script": "nhanes_merge_check.py",
+    "line": 6,
+    "old": "DATA_DIR = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\Dataset2\"  # change this",
+    "new": "DATA_DIR = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\data\\nhanes\"  # change this"
+  },
+  {
+    "script": "nhanes_cleaning_step1.py",
+    "line": 7,
+    "old": "    r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\Dataset2\\nhanes_2017_2020_merged_raw.csv\"",
+    "new": "    r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\data\\nhanes\\nhanes_2017_2020_merged_raw.csv\""
+  },
+  {
+    "script": "nhanes_cleaning_step1.py",
+    "line": 26,
+    "old": "output_path = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\Dataset2\\nhanes_cleaned_step1.csv\"",
+    "new": "output_path = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\data\\nhanes\\nhanes_cleaned_step1.csv\""
+  },
+  {
+    "script": "nhanes_create_target.py",
+    "line": 7,
+    "old": "    r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\Dataset2\\nhanes_cleaned_step1.csv\"",
+    "new": "    r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\data\\nhanes\\nhanes_cleaned_step1.csv\""
+  },
+  {
+    "script": "nhanes_create_target.py",
+    "line": 69,
+    "old": "output_path = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\Dataset2\\nhanes_final_with_target.csv\"",
+    "new": "output_path = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\data\\nhanes\\nhanes_final_with_target.csv\""
+  },
+  {
+    "script": "nhanes_baseline_comparison_models.py",
+    "line": 57,
+    "old": "DATA_PATH = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\Dataset2\\nhanes_final_with_target.csv\"",
+    "new": "DATA_PATH = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\data\\nhanes\\nhanes_final_with_target.csv\""
+  },
+  {
+    "script": "nhanes_baseline_comparison_models.py",
+    "line": 60,
+    "old": "PHASE1_FEATURES_JSON = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\nhanes_phase1_feature_fusion\\final_features_allfolds.json\"",
+    "new": "PHASE1_FEATURES_JSON = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\nhanes\\nhanes_phase1_feature_fusion\\final_features_allfolds.json\""
+  },
+  {
+    "script": "nhanes_baseline_comparison_models.py",
+    "line": 62,
+    "old": "OUT_DIR = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\nhanes_baseline_comparison\"",
+    "new": "OUT_DIR = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\nhanes\\nhanes_baseline_comparison\""
+  },
+  {
+    "script": "nhanes_confusion_matrix_comparison_plot.py",
+    "line": 9,
+    "old": "OUT_DIR = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\nhanes_figures\"",
+    "new": "OUT_DIR = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\nhanes\\nhanes_figures\""
+  },
+  {
+    "script": "generate_dataset_summary.py",
+    "line": 13,
+    "old": "FEATURES_JSON = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase1_feature_fusion\\final_features_allfolds.json\"",
+    "new": "FEATURES_JSON = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase1_feature_fusion\\final_features_allfolds.json\""
+  },
+  {
+    "script": "brfss2024_phase2_all_models_allfeatures_master.py",
+    "line": 107,
+    "old": "DEFAULT_OUT_DIR = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_allmodels_allfeatures\"",
+    "new": "DEFAULT_OUT_DIR = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_allmodels_allfeatures\""
+  },
+  {
+    "script": "plot_grouped_metrics.py",
+    "line": 9,
+    "old": "path = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_allmodels_allfeatures\\master_results_phase2_allfeatures.csv\"",
+    "new": "path = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_allmodels_allfeatures\\master_results_phase2_allfeatures.csv\""
+  },
+  {
+    "script": "simple_Avarage_fusion.py",
+    "line": 5,
+    "old": "lgb = pd.read_csv(r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_allmodels_allfeatures\\LightGBM_oof.csv\")",
+    "new": "lgb = pd.read_csv(r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_allmodels_allfeatures\\LightGBM_oof.csv\")"
+  },
+  {
+    "script": "simple_Avarage_fusion.py",
+    "line": 6,
+    "old": "rf = pd.read_csv(r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_allmodels_allfeatures\\RF_oof.csv\")",
+    "new": "rf = pd.read_csv(r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_allmodels_allfeatures\\RF_oof.csv\")"
+  },
+  {
+    "script": "simple_Avarage_fusion.py",
+    "line": 7,
+    "old": "cnn = pd.read_csv(r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_allmodels_allfeatures\\CNN1D_oof.csv\")",
+    "new": "cnn = pd.read_csv(r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_allmodels_allfeatures\\CNN1D_oof.csv\")"
+  },
+  {
+    "script": "confusion_metrix_allmodel.py",
+    "line": 12,
+    "old": "PROPOSED_CSV = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_fttf_dual_precbiased_gate\\phase2_fttf_dual_precbiased_gate_oof.csv\"",
+    "new": "PROPOSED_CSV = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_fttf_dual_precbiased_gate_selectedfeatures\\phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv\""
+  },
+  {
+    "script": "confusion_metrix_allmodel.py",
+    "line": 13,
+    "old": "LIGHTGBM_CSV = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_allmodels_allfeatures\\LightGBM_oof.csv\"",
+    "new": "LIGHTGBM_CSV = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_allmodels_allfeatures\\LightGBM_oof.csv\""
+  },
+  {
+    "script": "confusion_metrix_allmodel.py",
+    "line": 15,
+    "old": "ALLMODELS_DIR = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_allmodels_allfeatures\"",
+    "new": "ALLMODELS_DIR = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_allmodels_allfeatures\""
+  },
+  {
+    "script": "confusion_metrix_allmodel.py",
+    "line": 16,
+    "old": "OUT_DIR = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\confusion_matrix_comparison\"",
+    "new": "OUT_DIR = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\confusion_matrix_comparison\""
+  },
+  {
+    "script": "FN_bar_chart.py",
+    "line": 8,
+    "old": "proposed_path = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_fttf_dual_precbiased_gate_selectedfeatures\\phase2_fttf_dual_precbiased_gate_selectedfeatures_confmat_050.csv\"",
+    "new": "proposed_path = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_fttf_dual_precbiased_gate_selectedfeatures\\phase2_fttf_dual_precbiased_gate_selectedfeatures_confmat_050.csv\""
+  },
+  {
+    "script": "FN_bar_chart.py",
+    "line": 9,
+    "old": "cnn_path = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_allmodels_allfeatures\\CNN1D_confmat_050.csv\"",
+    "new": "cnn_path = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_allmodels_allfeatures\\CNN1D_confmat_050.csv\""
+  },
+  {
+    "script": "FN_bar_chart.py",
+    "line": 10,
+    "old": "lgbm_path = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_allmodels_allfeatures\\LightGBM_confmat_050.csv\"",
+    "new": "lgbm_path = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_allmodels_allfeatures\\LightGBM_confmat_050.csv\""
+  },
+  {
+    "script": "plot_threshold_curve.py",
+    "line": 9,
+    "old": "OOF_PATH = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_fttf_dual_precbiased_gate\\phase2_fttf_dual_precbiased_gate_oof.csv\"",
+    "new": "OOF_PATH = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_fttf_dual_precbiased_gate_selectedfeatures\\phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv\""
+  },
+  {
+    "script": "plot_threshold_curve.py",
+    "line": 10,
+    "old": "OUT_DIR = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\threshold_analysis\"",
+    "new": "OUT_DIR = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\threshold_analysis\""
+  },
+  {
+    "script": "heatmap.py",
+    "line": 6,
+    "old": "df = pd.read_csv(r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_fttf_dual_precbiased_gate_selectedfeatures\\ablation\\ablation_oof_components.csv\")",
+    "new": "df = pd.read_csv(r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_fttf_dual_precbiased_gate_selectedfeatures\\ablation\\ablation_oof_components.csv\")"
+  },
+  {
+    "script": "plot_calibration_brier_ece.py",
+    "line": 14,
+    "old": "OOF_PATH = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\phase2_fttf_dual_precbiased_gate\\phase2_fttf_dual_precbiased_gate_oof.csv\"",
+    "new": "OOF_PATH = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\phase2_fttf_dual_precbiased_gate_selectedfeatures\\phase2_fttf_dual_precbiased_gate_selectedfeatures_oof.csv\""
+  },
+  {
+    "script": "plot_calibration_brier_ece.py",
+    "line": 15,
+    "old": "OUT_DIR  = r\"C:\\Users\\<user>\\Research center\\Heartseanse2.0\\artifacts\\calibration_analysis\"",
+    "new": "OUT_DIR  = r\"C:\\Users\\<user>\\Research center\\HeartSense_repro\\runs\\brfss\\calibration_analysis\""
+  }
+]

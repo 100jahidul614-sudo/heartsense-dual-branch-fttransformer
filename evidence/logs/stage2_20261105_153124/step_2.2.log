@@ -1,0 +1,23 @@
+# command: "C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe" "C:\Users\<user>\Research center\HeartSense_repro\run_code\generate_dataset_summary.py"
+# cwd: C:\Users\<user>\Research center\HeartSense_repro
+# start: 2026-11-05T15:53:45.958151
+
+Raw XPT shape: (457670, 301)
+Dropped leakage cols: ['CVDINFR4', 'CVDCRHD4']
+
+===== DATASET SUMMARY (Phase-2 aligned) =====
+Samples (after target cleaning): 452464
+Positives (y=1): 42338
+Negatives (y=0): 410126
+Prevalence (%): 9.357
+Imbalance ratio (Neg/Pos): 9.69
+
+Numeric features (after leakage drop + cleaning): 283
+Selected features used by final system (Phase-1 list): 181
+
+Avg missing ratio (all cleaned numeric): 51.757%
+Avg missing ratio (selected features): 41.764%
+
+[SAVED] C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\phase1_feature_fusion\paper_tables\dataset_summary_brfss2024_phase2.csv
+
+# end: 2026-11-05T15:54:14.462722  duration_s: 28.5  exit_code: 0

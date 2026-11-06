@@ -1,0 +1,8 @@
+Python 3.12.10  (C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe)
+OS Windows-11-10.0.26300-SP0 | CPU threads 24 | RAM 31.4 GB
+PyTorch 2.9.1+cu128 | CUDA available True | CUDA runtime (build) 12.8 | cuDNN 91002
+GPU NVIDIA GeForce RTX 5070 Ti Laptop GPU | capability 12.0 | 11.9 GB
+nvidia-smi: NVIDIA GeForce RTX 5070 Ti Laptop GPU, 591.91, 12227 MiB, 12.0
+| NVIDIA-SMI 591.91                 Driver Version: 591.91         CUDA Version: 13.1     |
+Packages checked: 47 vs requirements, 48 vs original .venv312
+RESULT: PASS

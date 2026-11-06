@@ -1,0 +1,18 @@
+# command: "C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe" "C:\Users\<user>\Research center\HeartSense_repro\run_code\plot_calibration_brier_ece.py"
+# cwd: C:\Users\<user>\Research center\HeartSense_repro
+# start: 2026-11-06T03:10:47.651301
+
+
+[Calibration Metrics]
+  method    brier      ece
+Isotonic 0.069504 0.000586
+   Platt 0.069565 0.004059
+     Raw 0.094419 0.102732
+
+[SAVE] C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\calibration_analysis\calibration_metrics_brier_ece.csv
+[SAVE] C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\calibration_analysis\calibration_plot_bins15.png
+[SAVE] C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\calibration_analysis\probability_histograms.png
+
+✅ Done. Outputs are in: C:\Users\<user>\Research center\HeartSense_repro\runs\brfss\calibration_analysis
+
+# end: 2026-11-06T03:10:49.893021  duration_s: 2.2  exit_code: 0

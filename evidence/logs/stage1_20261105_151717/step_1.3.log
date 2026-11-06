@@ -1,0 +1,24 @@
+# command: "C:\Users\<user>\Research center\HeartSense_repro\.venv\Scripts\python.exe" "C:\Users\<user>\Research center\HeartSense_repro\run_code\nhanes_create_target.py"
+# cwd: C:\Users\<user>\Research center\HeartSense_repro
+# start: 2026-11-05T15:17:22.279728
+
+
+Final Dataset Shape: (9180, 174)
+
+Target Distribution:
+
+CVD_TARGET
+0    8305
+1     875
+Name: count, dtype: int64
+
+Target Percentage:
+
+CVD_TARGET
+0    90.46841
+1     9.53159
+Name: proportion, dtype: float64
+
+Saved: C:\Users\<user>\Research center\HeartSense_repro\data\nhanes\nhanes_final_with_target.csv
+
+# end: 2026-11-05T15:17:25.289445  duration_s: 3.0  exit_code: 0

@@ -1,0 +1,13 @@
+# Not used for distribution yet (private ZIP review copy); kept for a later repository.
+.venv/
+__pycache__/
+*.pyc
+data/**/*.xpt
+data/**/*.XPT
+data/nhanes/*.csv
+runs/**
+!runs/README.md
+logs/**
+!logs/README.md
+reports/**
+!reports/README.md

@@ -1,0 +1,10 @@
+=== Stage 2: BRFSS-2024 core: Phase 1, Table 3, proposed model + ablation
+[OK] raw BRFSS file SHA-256 verified (2.7s)
+  [2.1] Phase 1 multi-selector feature fusion (BRFSS)
+        python original_code/brfss2024_phase1_feature_fusion_cache_builder.py --data_path {BRFSS_XPT} --out_dir runs/brfss/phase1_feature_fusion   (cwd: .)
+  [2.2] Table 3 dataset summary
+        python run_code/generate_dataset_summary.py   (cwd: .)
+  [2.3] Phase 2 dual-branch FT-Transformer + GateNet + veto/rescue (BRFSS) + ablation
+        python original_code/brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py --data_path {BRFSS_XPT} --phase1_features_json runs/brfss/phase1_feature_fusion/final_features_allfolds.json --out_dir runs/brfss/phase2_fttf_dual_precbiased_gate_selectedfeatures   (cwd: .)
+
+[OK] pre-flight passed: all inputs present, no output exists, all paths inside HeartSense_repro.
