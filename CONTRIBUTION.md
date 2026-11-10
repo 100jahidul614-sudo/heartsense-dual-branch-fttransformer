@@ -190,7 +190,7 @@ The repository is organised to help supervisors and research collaborators navig
 | `docs/METHOD.md` | Research methodology and computational procedures. |
 | `REPRODUCIBILITY.md` | Re-execution evidence, output verification, environment information, and comparison results. |
 | `DATA.md` | Dataset sources, preparation, and data-access instructions. |
-| `artifacts/` | Available experimental outputs and analysis materials. |
+| `verified_outputs/` | Verified experimental outputs, evaluation results, and analysis materials. |
 | `evidence/` | Supporting verification records and research provenance. |
 | `manifests/` | File-integrity and source-mapping records. |
 

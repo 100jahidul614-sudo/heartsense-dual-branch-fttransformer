@@ -43,7 +43,7 @@ Script: `brfss2024_phase1_feature_fusion_cache_builder.py` (NHANES: `nhanes_phas
 
 NHANES uses the same rules. Its batch sizes are smaller (TabNet 2,048 / 512) and the permutation-importance subsample is 9,000 rows.
 
-## 3. Phase 2: dual-branch FT-Transformer
+## 3. Phase 2: Dual-Branch FT-Transformer
 
 Script: `brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py` (NHANES: `nhanes_phase2_…`). The defaults are at lines 60–105. Seeds are set with `seed_all` (line 151): NumPy, PyTorch and CUDA seeds 42, `cudnn.deterministic = True`, `cudnn.benchmark = False`.
 

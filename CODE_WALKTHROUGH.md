@@ -55,7 +55,7 @@ All defaults are module-level constants: P1 lines 55–88, P2 lines 46–105, BL
 - **In Phase 2:** P2 reads this list (`load_phase1_features` l.158, which returns the union of whatever the JSON holds). It applies it to all of its folds (`apply_phase1_feature_filter` l.185, called l.734).
 - **Scope of the fold isolation:** Selection happens inside each training fold, but the five fold selections are then combined into one shared union. Every respondent is in the training part of four of the five Phase-1 folds, so the shared list used in each Phase-2 outer fold was chosen partly with that fold's validation data. The complete procedure therefore does not maintain strict outer-fold-independent feature selection.
 
-## 2. Dual-branch FT-Transformer architecture (P2 l.203–285)
+## 2. Dual-Branch FT-Transformer architecture (P2 l.203–285)
 
 ```
 x ∈ R^F (standardised) ──► tokenize: t_j = x_j · W_j + b_j      W, b ∈ R^{F×48}    (FTTransformer.tokenize, l.241)

@@ -1,11 +1,13 @@
-# HeartSense: dual-branch FT-Transformer for heart-disease risk prediction (research code and verified reproduction)
+# Dual-Branch FT-Transformer for heart-disease risk prediction (research code and verified reproduction)
 
-This package contains the original research implementation behind
+This package contains the original research implementation behind the published paper
 
 > **Leakage-Safe Precision-Aware Dual-Branch FT-Transformer for Population-Scale Heart Disease Risk Prediction.**
 > J. Islam et al., *Sensors* **2026**, 26(11), 3417. https://doi.org/10.3390/s26113417
 
-It also contains the evidence from a complete re-run of that code on 5–6 November 2026. The re-run reproduced every
+This documentation refers to the method by its short name, **Dual-Branch FT-Transformer**. *HeartSense* was the project's working name during development; it remains in historical folder and file names (for example `HeartSense_repro`, `Heartseanse2.0`) and in the repository URL, which are left unchanged.
+
+The package also contains the evidence from a complete re-run of that code on 5–6 November 2026. The re-run reproduced every
 trained model's out-of-fold predictions **bit for bit** against the outputs saved in the original project.
 
 > **Private review copy.** It is not licensed for redistribution, and ownership and co-author permissions have not yet been reviewed. The raw datasets are not included.
@@ -14,7 +16,7 @@ trained model's out-of-fold predictions **bit for bit** against the outputs save
 
 | # | File | Why |
 | --- | --- | --- |
-| 1 | `CODE_WALKTHROUGH.md` | A guided tour of the implementation, with function names and line numbers: preprocessing, feature selection, the dual-branch FT-Transformer, recall- and precision-biased training, GateNet and veto/rescue, baselines, and how the reproduction was verified |
+| 1 | `CODE_WALKTHROUGH.md` | A guided tour of the implementation, with function names and line numbers: preprocessing, feature selection, the Dual-Branch FT-Transformer architecture, recall- and precision-biased training, GateNet and veto/rescue, baselines, and how the reproduction was verified |
 | 2 | `original_code/brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py` | The proposed model. Key lines: 203–285 (architecture), 300–310 (precision loss), 399–483 (GateNet), 485 (`train_one_branch`), 582–627 (gate inference, veto/rescue), 739–860 (cross-validation loop), 1032–1058 (ablation) |
 | 3 | `original_code/brfss2024_phase1_feature_fusion_cache_builder.py` | Feature selection per training fold, then a union across all folds (see §2 for what this means for fold independence). Key lines: 114, 131, 193 (the three selectors), 264 (fusion), 369–468 (fold loop and union) |
 | 4 | `original_code/brfss2024_phase2_all_models_allfeatures_master.py` | The 11-model baseline benchmark. Key lines: 217–347 (classical models, including the skipped XGBoost/CatBoost wrappers), 450 (deep-model trainer), 612 (model registry), 727–972 (CV loop and master table) |
@@ -134,7 +136,7 @@ These values are the outputs of the verified re-run, which are bit-identical to 
 
 | Model | Accuracy | Balanced acc. | Precision | Recall | F1 | ROC-AUC | PR-AUC |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| **Proposed (dual-branch FT-Transformer)** | 0.8509 | 0.7380 | 0.3359 | 0.5991 | **0.4294** | 0.8030 | 0.3659 |
+| **Proposed (Dual-Branch FT-Transformer)** | 0.8509 | 0.7380 | 0.3359 | 0.5991 | **0.4294** | 0.8030 | 0.3659 |
 | Random Forest | 0.8517 | 0.7284 | 0.3318 | 0.5768 | 0.4212 | 0.8494 | 0.3730 |
 | Logistic regression | 0.7522 | 0.7706 | 0.2453 | 0.7933 | 0.3747 | 0.8491 | 0.3799 |
 | LSTM | 0.7567 | 0.7580 | 0.2491 | 0.7597 | 0.3722 | 0.8420 | 0.3606 |
