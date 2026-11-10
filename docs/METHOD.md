@@ -1,12 +1,13 @@
-# Method as implemented in the code
+# Dual-Branch FT-Transformer — Implemented Methodology
 
-This document describes what the original scripts do, with references to `original_code/`. Line numbers refer to the distribution copies, which have the same line numbering as the originals. It documents the implementation as it runs; it does not re-derive or reassess the paper.
+This document specifies the computational methodology of the Dual-Branch FT-Transformer as implemented in the original research scripts: cohort construction and outcome definitions, Phase-1 feature selection, the two-branch model and its training objectives, GateNet fusion with the veto/rescue rule, the baseline models and the post-hoc analyses. Each step references the corresponding function or line in `original_code/`; the distribution copies keep the original line numbering. The description follows the code as it runs, and the published article remains the reference for the reported findings.
 
 ## 1. Data preparation
 
 ### BRFSS-2024
 The BRFSS file is used in `brfss2024_phase1_feature_fusion_cache_builder.py`, `brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py` and `brfss2024_phase2_all_models_allfeatures_master.py`.
 
+- **Outcome definition:** `_MICHD` is the BRFSS calculated variable for respondents who have ever reported coronary heart disease (CHD) or myocardial infarction (MI). It records self-reported CHD/MI history at the time of the survey, so the task is classification of reported history, not prediction of prospectively observed future events.
 - **Target:** `_MICHD` is decoded to 0/1. Rows without a valid label are dropped, leaving 452,464 of 457,670 (42,338 positive, 9.36%).
 - **Leakage columns removed:** `CVDINFR4` (heart attack) and `CVDCRHD4` (coronary heart disease), which define `_MICHD`.
 - **Cleaning:**
@@ -18,7 +19,7 @@ The BRFSS file is used in `brfss2024_phase1_feature_fusion_cache_builder.py`, `b
 ### NHANES 2017–March 2020
 - `nhanes_merge_check.py` merges 18 modules on `SEQN`: 15,560 participants × 282 variables.
 - `nhanes_cleaning_step1.py` drops variables with more than 70% missing, leaving 173.
-- `nhanes_create_target.py` builds `CVD_TARGET` from the MCQ cardiovascular items, giving 9,180 participants with 875 positive (9.53%).
+- `nhanes_create_target.py` builds `CVD_TARGET` from the self-reported MCQ cardiovascular items (`MCQ160B/C/D/E`: heart failure, CHD, angina, heart attack), giving 9,180 participants with 875 positive (9.53%).
 - `MCQ160B/C/D/E` are removed as label-defining columns, leaving 163 candidate features.
 
 ## 2. Phase 1: multi-selector feature fusion per training fold, then across folds
@@ -75,6 +76,7 @@ Script: `brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py` (NHAN
 - **Model and training** (`train_gatenet`, line 415): a 3 → 16 → 1 MLP with ReLU, BCE loss, AdamW lr 5×10⁻³, 6 epochs, batch 4,096.
   - It is trained on 75% of the inner-validation samples (`StratifiedShuffleSplit`, seed 42+1000+fold).
   - The epoch with the highest mean (1 − |g − target|) on the other 25% is kept.
+  - **NHANES single-class fallback** (`nhanes_phase2_…`, lines 1106–1126): if `gate_y` contains only one class, the NHANES script prints a warning and splits the gate data 75/25 without stratification, from an index shuffled with `np.random.RandomState(42+1000+fold)`; otherwise it uses the stratified split above. The BRFSS script has no such branch. The fallback did not trigger in the verified NHANES run (no single-class warning in its step log).
 - **Inference** (`gatenet_predict_g_numpy`, line 582): g = sigmoid(logit + 0.9) and p_gate = g·p_prec + (1 − g)·p_rec. The bias 0.9 shifts the weight towards the precision branch.
 
 ### 3.5 Veto/rescue rule (`apply_veto_rescue_numpy`, line 609)
@@ -83,7 +85,10 @@ Script: `brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py` (NHAN
 - **Decision:** threshold 0.50 on the final probability.
 - **In the verified runs:** veto applied to 72–74% of BRFSS samples per fold and 73–85% of NHANES samples. Rescue never fired. On NHANES the final and gate-only 0.50 decisions are identical (FP 679, FN 374 in both). On BRFSS they differ by one false positive: 50,488 for gate-only versus 50,487 for the final output, with FN 16,975 in both. Ranking metrics (AUROC/AUPRC) differ between the gate-only and final outputs, because vetoed samples get probability 0.
 
-### 3.6 Outputs and ablation (lines 862–1070)
+### 3.6 NHANES: cohort-specific selection and training
+The NHANES analysis applies the same method to the NHANES cohort itself; it does not reuse the BRFSS model. Phase 1 is run on NHANES (163 → 141 features, `nhanes_phase1_feature_fusion_cache_builder.py`). Both branches and GateNet are then trained and evaluated from scratch with 5-fold cross-validation on NHANES (`nhanes_phase2_…`, fold loop line 1009). No BRFSS-trained weights are loaded; the only weight loading in the NHANES script restores each model's own best early-stopping state (lines 654, 790).
+
+### 3.7 Outputs and ablation (lines 862–1070)
 - **Per fold:** accuracy, balanced accuracy, precision, recall, F1 at 0.50, ROC-AUC, AUPRC (`average_precision_score`), best epochs, mean gate value, and veto/rescue fractions (`*_metrics.csv`, with a `mean` row).
 - **Pooled:** out-of-fold probabilities (`*_oof.csv`: `y_true, p_rec, p_prec, g, p_gate_only, p_final, y_prob`) and the confusion matrix at 0.50 (`*_confmat_050.csv`).
 - **Ablation** (`ablation/`): pooled metrics and confusion matrices for five variants: recall branch only, precision branch only, simple average of the branches, GateNet without veto/rescue, and the final model.

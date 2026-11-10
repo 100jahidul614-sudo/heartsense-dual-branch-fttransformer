@@ -1,8 +1,8 @@
-# Code walkthrough
+# Dual-Branch FT-Transformer — Code Walkthrough
 
-This walkthrough follows the original implementation in the order the pipeline runs. Every reference points to a function and line in `original_code/`. The distribution copies keep the original line numbering; only the user folder in hard-coded default paths reads `<user>`.
+This walkthrough traces the original research implementation of the Dual-Branch FT-Transformer in the order the pipeline runs: data preparation, Phase-1 feature selection, the two-branch model and its training objectives, GateNet fusion with the veto/rescue rule, and the baselines and evaluation. A final section summarises how the implementation was re-run and checked. Every reference points to a function and line in `original_code/`. The distribution copies keep the original line numbering; only the user folder in hard-coded default paths reads `<user>`.
 
-The main reference is the BRFSS script; NHANES equivalents are given where they differ. This document was prepared with AI assistance from the code as it stands. It describes what the code does and makes no claims about who wrote which part (see `CONTRIBUTION.md`).
+The BRFSS scripts are the main reference; NHANES equivalents are given where they differ. Development attribution is described in `CONTRIBUTION.md`.
 
 **Abbreviations used below:**
 
@@ -22,7 +22,7 @@ All defaults are module-level constants: P1 lines 55–88, P2 lines 46–105, BL
 | --- | --- | --- |
 | Load | P2 l.712; P1 l.325 | `pd.read_sas(..., format="xport")` on the raw LLCP2024 file |
 | Leakage control | P2 l.715–718; P1 l.331–334 | Drops `CVDINFR4` and `CVDCRHD4` (`DEFAULT_LEAKAGE_COLS`), the two items that define the target |
-| Target | `decode_brfss_target` P2 l.135; used l.721–725 | `_MICHD`: 2 → 0, keep {0, 1} rows. Gives 452,464 respondents, 42,338 positive |
+| Target | `decode_brfss_target` P2 l.135; used l.721–725 | `_MICHD`: 2 → 0, keep {0, 1} rows. Gives 452,464 respondents, 42,338 positive. `_MICHD` is the BRFSS calculated variable for respondents who have ever reported coronary heart disease (CHD) or myocardial infarction (MI); it records self-reported CHD/MI history at the time of the survey, not prospectively observed future events |
 | Numeric features | `safe_numeric_only` P2 l.114; l.729 | Keeps numeric columns only |
 | Missing codes | `brfss_missing_to_nan` P2 l.117; P1 l.97 | Replaces the BRFSS codes {7, 9, 77, 99, 777, 999, 7777, 9999, 77777, 99999, 888, 8888, 88888} with NaN in every numeric column |
 | Degenerate columns | `drop_all_nan_and_constant` P2 l.124 | Drops all-missing and constant columns, leaving 283 candidate features |
@@ -106,6 +106,7 @@ x ∈ R^F (standardised) ──► tokenize: t_j = x_j · W_j + b_j      W, b �
   - BCE loss, AdamW lr 5×10⁻³, 6 epochs, batch 4,096.
   - It trains on 75% of the inner-validation samples and selects the epoch on the other 25% (`StratifiedShuffleSplit` l.815, seed 42+1000+fold).
   - The selection score is mean(1 − |g − gate_y|).
+- **NHANES single-class fallback** (NH-P2 l.1106–1126): before splitting the gate data, the NHANES script checks whether `gate_y` contains both classes. If it contains only one, it prints a warning and uses a non-stratified 75/25 split of a shuffled index (`np.random.RandomState(42+1000+fold)`); otherwise it uses the same `StratifiedShuffleSplit(test_size=0.25)` as BRFSS. The BRFSS script has no such branch. In the verified NHANES run the fallback did not trigger: the step log contains no single-class warning (`evidence/logs/stage1_20261105_151717/step_1.5.log`).
 
 ### 4.2 Inference on the outer fold (l.830–860)
 1. **Gate weight** (`gatenet_predict_g_numpy` l.582): g = σ(GateNet logit + 0.9). `gate_bias` = 0.9 shifts the weight towards the precision branch.
@@ -118,7 +119,10 @@ x ∈ R^F (standardised) ──► tokenize: t_j = x_j · W_j + b_j      W, b �
 
 **What the verified runs show** (from `*_metrics.csv` and `ablation/`):
 - The veto applied to 72–74% of BRFSS samples per fold (73–85% on NHANES), and rescue never fired.
-- The final and gate-only 0.50 decisions are therefore almost the same. On NHANES the final and gate-only 0.50 decisions are identical (FP 679, FN 374 in both). On BRFSS they differ by one false positive: 50,488 for gate-only versus 50,487 for the final output, with FN 16,975 in both; the veto moved one gate-only false positive below 0.50.
+- **Binary decisions at threshold 0.50:**
+  - **BRFSS:** the gate-only and final predictions differ by exactly one false positive. Gate-only gives TN 359,638 / FP 50,488 / FN 16,975 / TP 25,363; the final output gives TN 359,639 / FP 50,487 / FN 16,975 / TP 25,363. Because rescue never fired and the veto can only lower probabilities, this is a single gate-only false positive that the veto set to 0.
+  - **NHANES:** the gate-only and final binary decisions are identical (TN 7,626 / FP 679 / FN 374 / TP 501 in both).
+  - Source: `ablation/ablation_confmats.csv` and `ablation/nhanes_ablation_confmats.csv` in `verified_outputs/`.
 - Ranking metrics differ, because vetoed samples get probability 0. On NHANES the AUROC/AUPRC is 0.8062/0.4252 for the final output and 0.8736/0.4677 for the gate-only output.
 
 ### 4.3 Outputs and ablation (l.868–1058)
@@ -167,9 +171,9 @@ x ∈ R^F (standardised) ──► tokenize: t_j = x_j · W_j + b_j      W, b �
 | --- | --- | --- |
 | Isolation | The original project was only read. All work ran in a separate folder, and a SHA-256 baseline of all 277 project files was re-checked after every stage (unchanged) | `evidence/manifests_verified_runs/original_project_baseline.sha256`, `evidence/logs/stage*/summary.json` |
 | Exact copies | The 19 scripts were copied byte for byte. Five take all paths as arguments and ran unchanged. The other 14 got execution copies where only path string literals were rewritten (27 lines) | `PATH_CHANGES.diff`, `evidence/manifests_verified_runs/path_changes.json` |
-| Same settings | Seeds, preprocessing, feature selection, architecture and hyperparameters as in the scripts; the 47 pinned versions captured from the project's `.venv312` interpreter during the reproduction (5 November 2026); the versions installed for the original January 2026 experiments were not recorded; XGBoost/CatBoost left absent | `env/requirements.txt`, `evidence/logs/stage0_env/` |
+| Same settings | Seeds, preprocessing, feature selection, architecture and hyperparameters as in the scripts; the 47 pinned package versions describe the November 2026 verification environment: they were captured from the project's `.venv312` interpreter on 5 November 2026 and are not necessarily the versions used in the original research runs, which were not recorded; XGBoost/CatBoost left absent | `env/requirements.txt`, `evidence/logs/stage0_env/` |
 | Guarded runs | A pre-flight check per stage confirmed script hashes, inputs present, outputs absent (no overwrite), all paths inside the run folder, and the raw-data SHA-256. Every step was logged with command, timing, exit code, console output and environment | `tools/run_stage.py`, `evidence/logs/` |
-| Comparison | Every output was compared file by file with the original saved outputs: CSV values, probability flips at 0.50, JSON contents, image bytes | `evidence/reports/compare_stage*.md` |
+| Comparison | Each output written by the re-run was compared file by file with its original saved counterpart: CSV values and probability flips at 0.50, JSON contents, image bytes. Historical files that the current scripts do not write were recorded as reference-only and not regenerated (scope below) | `evidence/reports/compare_stage*.md` |
 | Published values | 200 printed values were checked against saved and reproduced outputs, and differences recorded as found | `evidence/reports/published_vs_reproduced_20261106_031053.csv`, `REPRODUCIBILITY.md` §5 |
 
 **Outcome:**
@@ -179,6 +183,12 @@ x ∈ R^F (standardised) ──► tokenize: t_j = x_j · W_j + b_j      W, b �
   - the saved master table's 9-decimal rounding (≤ 5×10⁻¹⁰);
   - calibration values within 2.4×10⁻¹², computed originally from an earlier, 1.4×10⁻⁷-different copy of the predictions;
   - one PDF creation date (0 differing pixels).
+
+**Comparison scope:**
+- 92 original output files were copied as references. 84 of them lie in the output folders of the re-run scripts.
+- **Regenerated and compared (78):** 71 identical; 6 matching within 5×10⁻¹⁰ (stored absolute paths, the 9-decimal rounding of the saved master table, calibration values within 2.4×10⁻¹²); 1 PDF differing only in its creation date.
+- **Historical reference-only artifacts (6):** files present in the original output folders that the current scripts do not write: two earlier Fig 15 drafts, three exploratory Phase-1 files and one radar plot. They were kept for reference and not regenerated.
+- **Outside the re-run scope (8):** the January 2026 copy of the proposed-model run and its SHAP surrogate outputs. The January predictions were used only as a cross-check (largest difference 1.4×10⁻⁷, no 0.50 decision changes).
 
 **For this package:**
 - The scripts were path-sanitised, and the execution copies can be regenerated for any folder.
