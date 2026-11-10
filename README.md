@@ -1,231 +1,279 @@
-# Dual-Branch FT-Transformer for heart-disease risk prediction (research code and verified reproduction)
 
-This package contains the original research implementation behind the published paper
+# Dual-Branch FT-Transformer
+### Original Research Implementation and Reproducibility
 
-> **Leakage-Safe Precision-Aware Dual-Branch FT-Transformer for Population-Scale Heart Disease Risk Prediction.**
-> J. Islam et al., *Sensors* **2026**, 26(11), 3417. https://doi.org/10.3390/s26113417
+This repository presents the original research implementation, experimental results, and supporting materials for the peer-reviewed study:
 
-This documentation refers to the method by its short name, **Dual-Branch FT-Transformer**. *HeartSense* was the project's working name during development; it remains in historical folder and file names (for example `HeartSense_repro`, `Heartseanse2.0`) and in the repository URL, which are left unchanged.
+> **Leakage-Safe Precision-Aware Dual-Branch FT-Transformer for Population-Scale Heart Disease Risk Prediction**
+>
+> **Authors:** Jahidul Islam, Dristi Datta, and Fowzia Akhter
+>
+> **Published:** *Sensors*, 2026, 26(11), 3417
+>
+> **DOI:** https://doi.org/10.3390/s26113417
 
-The package also contains the evidence from a complete re-run of that code on 5–6 November 2026. The re-run reproduced every
-trained model's out-of-fold predictions **bit for bit** against the outputs saved in the original project.
+## Research Overview
 
-> **Private review copy.** It is not licensed for redistribution, and ownership and co-author permissions have not yet been reviewed. The raw datasets are not included.
+Heart-disease risk prediction using population-scale health data is challenging because of class imbalance and the trade-off between identifying positive cases and limiting false-positive predictions.
 
-## Start here: suggested reading order
+This research develops a **precision-aware Dual-Branch FT-Transformer** combining:
 
-| # | File | Why |
-| --- | --- | --- |
-| 1 | `CODE_WALKTHROUGH.md` | A guided tour of the implementation, with function names and line numbers: preprocessing, feature selection, the Dual-Branch FT-Transformer architecture, recall- and precision-biased training, GateNet and veto/rescue, baselines, and how the reproduction was verified |
-| 2 | `original_code/brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py` | The proposed model. Key lines: 203–285 (architecture), 300–310 (precision loss), 399–483 (GateNet), 485 (`train_one_branch`), 582–627 (gate inference, veto/rescue), 739–860 (cross-validation loop), 1032–1058 (ablation) |
-| 3 | `original_code/brfss2024_phase1_feature_fusion_cache_builder.py` | Feature selection per training fold, then a union across all folds (see §2 for what this means for fold independence). Key lines: 114, 131, 193 (the three selectors), 264 (fusion), 369–468 (fold loop and union) |
-| 4 | `original_code/brfss2024_phase2_all_models_allfeatures_master.py` | The 11-model baseline benchmark. Key lines: 217–347 (classical models, including the skipped XGBoost/CatBoost wrappers), 450 (deep-model trainer), 612 (model registry), 727–972 (CV loop and master table) |
-| 5 | `REPRODUCIBILITY.md` | What was re-run, what matched, and where published values differ from the saved outputs |
-| 6 | `evidence/package_build/verification.md` | Checks that the packaged code is the original code, apart from paths |
+1. **Recall-oriented learning** to prioritise positive-case detection.
+2. **Precision-oriented learning** to control false-positive predictions.
+3. **GateNet adaptive fusion** to combine branch probabilities, followed by veto/rescue decision rules.
 
-The NHANES versions of scripts 2–3 (`original_code/nhanes_*`) follow the same structure. `docs/METHOD.md` gives the full method description, and `CONTRIBUTION.md` the contribution map and attribution notes.
+The proposed approach was evaluated on **452,464 BRFSS 2024 respondents** and an independently trained **NHANES 2017–March 2020** evaluation pipeline involving **9,180 participants**. The study also examined 11 baseline models and supporting ablation, threshold, error-analysis, and calibration experiments.
 
-**Contents**
-- [1. What is in this package](#1-what-is-in-this-package)
-- [2. The method in brief](#2-the-method-in-brief)
-- [3. Experiments and evaluation](#3-experiments-and-evaluation)
-- [4. Verified results](#4-verified-results)
-- [5. How to run](#5-how-to-run)
-- [6. Layout](#6-layout)
-- [7. Reproducibility evidence](#7-reproducibility-evidence)
-- [8. Attribution](#8-attribution)
+This repository preserves the **original Python research scripts, experimental outputs, and methodology**. In November 2026, these existing materials were organised and the core experiments were rerun to verify reproducibility against the original saved results.
 
-## 1. What is in this package
+The project was initially developed under the working name *HeartSense*. The documentation now uses **Dual-Branch FT-Transformer** as the method's short name, while historical filenames and paths remain unchanged.
 
-| Folder / file | What it is |
+---
+
+## Quick Navigation
+
+| Resource | What to Explore |
 | --- | --- |
-| `original_code/` | The **19 original research scripts** (6,951 lines) that produced the paper's main results. They are distribution copies: identical to the originals except that the personal Windows user folder in hard-coded default paths reads `C:\Users\<user>\` (see `PACKAGE_NOTES.md`) |
-| `run_code/` | Execution copies of the 14 scripts whose file paths are written into the code. They differ from `original_code/` **only in path strings**, and `tools/make_run_copies.py` regenerates them for wherever this folder is placed |
-| `CODE_WALKTHROUGH.md` | Guided tour of the code with function and line references (start here) |
-| `docs/METHOD.md` | Code-level description of the pipeline, with file and line references |
-| `DATA.md` | Exact dataset sources, file names, sizes and SHA-256 checksums, and where to put the files |
-| `env/` | `requirements.txt` (47 package versions captured from the project's `.venv312` during the reproduction; not a record of the January 2026 environment) and `ENVIRONMENT.md` (the hardware and software used) |
-| `verified_outputs/` | Outputs of the verified re-run: feature lists, metrics, confusion matrices, ablations, master table and figures (about 2 MB). Row-level prediction files are listed by checksum only |
-| `REPRODUCIBILITY.md` | The reproduction result (Stages 0–4) and a comparison of published numbers with the saved outputs |
-| `CONTRIBUTION.md` | Contribution map: which files show which part of the work, with attribution notes |
-| `evidence/` | Stage reports, file-by-file comparison reports, run logs, environment records, SHA-256 manifests, and the exact tool versions used for the verified runs |
-| `tools/`, `00*.ps1`–`04*.ps1` | Non-scientific helpers: environment check, run-copy generation, stage runner with pre-flight checks and logging, output comparison, package verification |
+| [`CODE_WALKTHROUGH.md`](CODE_WALKTHROUGH.md) | Detailed walkthrough of the original Python implementation |
+| [`docs/METHOD.md`](docs/METHOD.md) | Feature selection, architecture, training, and evaluation procedures |
+| [`original_code/`](original_code/) | 19 original research scripts |
+| [`verified_outputs/`](verified_outputs/) | Model results, feature selections, ablations, and analysis outputs |
+| [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) | Experimental reruns, output comparisons, and verification evidence |
+| [`DATA.md`](DATA.md) | Dataset sources, preparation, and input requirements |
+| [`CONTRIBUTION.md`](CONTRIBUTION.md) | Research contributions, implementation history, and attribution |
 
-## 2. The method in brief
+## 1. Research Methodology
 
-The task is binary classification of self-reported coronary heart disease or myocardial infarction (BRFSS-2024
-`_MICHD`), with an external check on NHANES 2017–March 2020. The positive class is about 9.4% of BRFSS respondents and 9.5% of the NHANES cohort.
+### 1.1 Datasets and Feature Selection
+
+| Dataset | Participants | Positive Prevalence | Selected Features |
+| --- | ---: | ---: | ---: |
+| BRFSS 2024 | 452,464 | 9.36% | 181 of 283 |
+| NHANES 2017–March 2020 | 9,180 | ~9.53% | 141 of 163 |
+
+BRFSS uses the self-reported coronary heart disease or myocardial infarction indicator (`_MICHD`) as the binary target.
+
+The feature-selection pipeline combines **Pearson correlation, TabNet mask importance, and HistGradientBoosting permutation importance**.
+
+Each selector operates within Phase-1 training folds. Selected features are fused within folds and then combined across five folds into the shared Phase-2 feature set.
+
+**Validation detail:** Because the Phase-1 selections are united across folds before Phase-2 evaluation, the final feature set is not strictly independent of every Phase-2 outer validation fold. The exact procedure is documented in `docs/METHOD.md`.
+
+### 1.2 Proposed Architecture
 
 ```mermaid
-flowchart LR
-  A["Raw survey data<br/>BRFSS-2024 / NHANES"] --> B["Cleaning: missing codes to NaN,<br/>label-defining columns removed"]
-  B --> C["Phase 1, per training fold:<br/>Pearson / TabNet / HGB permutation,<br/>then one union across all 5 folds"]
-  C --> D["Phase 2, 5-fold CV:<br/>median impute + scale on the training fold"]
-  D --> E1["Recall branch<br/>FT-Transformer"]
-  D --> E2["Precision branch<br/>FT-Transformer"]
-  E1 --> G["GateNet: g from<br/>p_prec, p_rec, |p_prec - p_rec|"]
-  E2 --> G
-  G --> H["p = g * p_prec + (1 - g) * p_rec"]
-  H --> V["Veto / rescue rule"]
-  V --> O["Out-of-fold predictions,<br/>metrics at 0.50"]
+flowchart TD
+    A["BRFSS / NHANES Data"] --> B["Cleaning and Target Preparation"]
+    B --> C["Phase 1: Feature Selection"]
+    C --> D["Phase 2: Five-Fold Evaluation"]
+    D --> E["Recall-Oriented FT-Transformer"]
+    D --> F["Precision-Oriented FT-Transformer"]
+    E --> G["GateNet Adaptive Fusion"]
+    F --> G
+    G --> H["Veto / Rescue Rules"]
+    H --> I["Predictions and Evaluation"]
 ```
 
-- **Phase 1: feature selection per training fold, then combined across folds.**
-  - In each of five stratified folds (seed 42), three selectors run on the training part only:
-    - absolute Pearson correlation ≥ 0.08;
-    - TabNet mask importance ≥ 0.75 / N;
-    - HistGradientBoosting permutation importance, with a conservative lower bound μ − 1.7σ > 2×10⁻⁴ (5 repeats on a 30,000-row stratified subsample).
-  - A fold keeps every feature any selector chose. The final list is the union over the folds: 181 of 283 numeric BRFSS features, and 141 of 163 NHANES features. Phase 2 uses this one list in every fold.
-  - Selection happens inside each training fold, but the five fold selections are then combined into one shared union. Every respondent is in the training part of four of the five Phase-1 folds, so the shared list used in each Phase-2 outer fold was chosen partly with that fold's validation data. The complete procedure therefore does not maintain strict outer-fold-independent feature selection.
-- **Phase 2: two FT-Transformers trained for different errors.**
-  - **Architecture:** each numeric feature becomes a 48-dimensional token (a learned per-feature weight and bias). Tokens pass through 2 pre-norm transformer blocks (4 attention heads, GELU feed-forward ×4, dropout 0.08), are mean-pooled, and go through an MLP head (256 → 64 → 1).
-  - **Two separately trained branches:**
-    - The *recall branch* uses class-weighted BCE (pos_weight = negatives/positives).
-    - The *precision branch* divides that weight by α = 1.3 and multiplies the loss of negative samples by 4, which makes false positives costlier.
-  - **Training:** AdamW (lr 3×10⁻⁴, weight decay 10⁻⁵), batch 1,024, at most 30 epochs, early stopping on inner-validation AUPRC with patience 6, mixed precision, fixed seeds and deterministic cuDNN.
-- **GateNet: per-person mixing.**
-  - A 3→16→1 MLP reads (p_prec, p_rec, |p_prec − p_rec|).
-  - It is trained on the inner validation split to predict when the precision branch is right and the recall branch is wrong.
-  - At inference a bias of 0.9 is added to its logit, and its output g mixes the branches: p = g·p_prec + (1 − g)·p_rec.
-- **Veto/rescue rule:**
-  - If p_prec < 0.20 the final probability is set to 0.
-  - If p_rec > 0.98 it is set to 1.
-  - Decisions use threshold 0.50.
-  - In the verified runs the veto applied to 72–85% of samples per fold and rescue never fired. On NHANES the final and gate-only 0.50 decisions are identical (FP 679, FN 374 in both). On BRFSS they differ by one false positive: 50,488 for gate-only versus 50,487 for the final output, with FN 16,975 in both.
-- **Leakage controls in the code:**
-  - label-defining columns are removed (`CVDINFR4`, `CVDCRHD4` for BRFSS; `MCQ160B/C/D/E` for NHANES);
-  - imputation and scaling are fitted on training folds only;
-  - early stopping and GateNet training use an inner split of the training fold;
-  - SMOTE for the LightGBM baseline is applied to training folds only.
-  - Not covered by these controls: the Phase-1 feature list is a union across all five folds and is shared by every Phase-2 fold (see Phase 1 above).
+The implementation contains two separately trained FT-Transformer branches with complementary loss functions.
 
-`docs/METHOD.md` gives the same description with references to the functions and lines in `original_code/`.
+**Core architecture:**
+- Learned 48-dimensional numerical feature tokens.
+- Two pre-normalisation Transformer blocks with four attention heads.
+- GELU feed-forward layers, dropout, mean pooling, and an MLP prediction head.
+- Class-weighted binary cross-entropy for the recall branch.
+- Adjusted positive weighting (`α = 1.3`) and negative-sample loss weighting (`4`) for the precision branch.
 
-## 3. Experiments and evaluation
+**GateNet** is a `3 → 16 → 1` MLP that combines branch predictions using:
 
-| Experiment | Scripts (`original_code/`) | Paper element |
-| --- | --- | --- |
-| NHANES cohort build: merge 18 modules on SEQN, drop variables > 70% missing, build `CVD_TARGET` | `nhanes_merge_check.py`, `nhanes_cleaning_step1.py`, `nhanes_create_target.py` | Table 14 |
-| NHANES Phase 1 + proposed model + ablation | `nhanes_phase1_feature_fusion_cache_builder.py`, `nhanes_phase2_run_fttransformer_dualbranch_precbiased_gate.py` | Tables 14–15 |
-| NHANES baselines (LightGBM, Random Forest, CNN) + Fig 15 | `nhanes_baseline_comparison_models.py`, `nhanes_confusion_matrix_comparison_plot.py` | Table 15, Fig 15 |
-| BRFSS Phase 1 + dataset summary | `brfss2024_phase1_feature_fusion_cache_builder.py`, `generate_dataset_summary.py` | Table 3 |
-| BRFSS proposed model + ablation | `brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py` | Tables 8–10, abstract |
-| 11 BRFSS baselines on all 283 numeric features | `brfss2024_phase2_all_models_allfeatures_master.py`, `update_master_table_add_experiment.py`, `artifacts/…/plot_grouped_metrics.py` | Tables 4, 6, Fig 4 |
-| Error, threshold, rule-sensitivity and calibration analyses | `simple_Avarage_fusion.py`, `confusion_metrix_allmodel.py`, `FP/FN_bar_chart.py` (Fig 5; run as `run_code/FN_bar_chart.py`), `plot_threshold_curve.py`, `heatmap.py`, `plot_calibration_brier_ece.py` | Tables 8–9, 12; Figs 5, 7–11 |
+`p = g × p_prec + (1 − g) × p_rec`
 
-- **Evaluation:**
-  - All models use stratified 5-fold cross-validation with shuffling and seed 42.
-  - The scripts report accuracy, balanced accuracy, precision, recall, F1, ROC-AUC and AUPRC (scikit-learn average precision) per fold and as fold means.
-  - Pooled out-of-fold confusion matrices are given at threshold 0.50.
-  - Threshold curves cover 0.01–0.99. The veto/rescue sensitivity grid is v = 0.10–0.30, r = 0.90–0.99.
-  - Calibration is measured with Brier score and 15-bin ECE for raw, Platt and isotonic calibration, cross-fitted over 5 folds.
-- **Baselines** (BRFSS, all 283 numeric features):
-  - LightGBM (SMOTE inside training folds);
-  - logistic regression, linear SVM (calibrated), decision tree and random forest (class-balanced);
-  - KNN, Gaussian naive Bayes;
-  - an autoencoder + logistic regression;
-  - a 1-D CNN, an LSTM and a GRU.
+Its inputs are the precision probability, recall probability, and absolute disagreement between them.
 
-  XGBoost and CatBoost were not installed in the original environment, so the script skipped them, and they are not installed here.
+The final decision mechanism applies:
+- **Veto:** `p_prec < 0.20` → final probability set to 0.
+- **Rescue:** `p_rec > 0.98` → final probability set to 1.
+- **Decision threshold:** 0.50.
 
-## 4. Verified results
+The implementation uses AdamW, mixed-precision training, inner-validation early stopping, and stratified five-fold evaluation.
 
-These values are the outputs of the verified re-run, which are bit-identical to the original saved outputs.
+Preprocessing includes removal of label-defining columns, training-fold-only imputation and scaling, and training-fold-only resampling where applicable.
 
-**BRFSS-2024, 5-fold mean at threshold 0.50** (`verified_outputs/brfss/phase2_allmodels_allfeatures/master_results_phase2_allfeatures.csv`)
+Detailed architecture, loss functions, hyperparameters, and code references are provided in [`docs/METHOD.md`](docs/METHOD.md) and [`CODE_WALKTHROUGH.md`](CODE_WALKTHROUGH.md).
 
-| Model | Accuracy | Balanced acc. | Precision | Recall | F1 | ROC-AUC | PR-AUC |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| **Proposed (Dual-Branch FT-Transformer)** | 0.8509 | 0.7380 | 0.3359 | 0.5991 | **0.4294** | 0.8030 | 0.3659 |
-| Random Forest | 0.8517 | 0.7284 | 0.3318 | 0.5768 | 0.4212 | 0.8494 | 0.3730 |
-| Logistic regression | 0.7522 | 0.7706 | 0.2453 | 0.7933 | 0.3747 | 0.8491 | 0.3799 |
-| LSTM | 0.7567 | 0.7580 | 0.2491 | 0.7597 | 0.3722 | 0.8420 | 0.3606 |
-| 1-D CNN | 0.7418 | 0.7727 | 0.2400 | 0.8108 | 0.3703 | 0.8505 | 0.3808 |
-| GRU | 0.7281 | 0.7591 | 0.2287 | 0.7973 | 0.3550 | 0.8373 | 0.3487 |
-| Autoencoder + LR | 0.7378 | 0.7360 | 0.2245 | 0.7337 | 0.3438 | 0.8087 | 0.2903 |
-| Decision tree | 0.7459 | 0.7064 | 0.2170 | 0.6577 | 0.3263 | 0.7600 | 0.2637 |
-| Naive Bayes | 0.6550 | 0.7188 | 0.1862 | 0.7973 | 0.3019 | 0.7555 | 0.1925 |
-| LightGBM | 0.9089 | 0.5603 | 0.5572 | 0.1313 | 0.2126 | 0.8526 | 0.3831 |
-| Linear SVM | 0.9091 | 0.5528 | 0.5745 | 0.1144 | 0.1902 | 0.8483 | 0.3784 |
-| KNN | 0.9067 | 0.5042 | 0.6147 | 0.0090 | 0.0178 | 0.7774 | 0.2802 |
+## 2. Experimental Results
 
-**Proposed model on BRFSS**, pooled out-of-fold over 452,464 respondents: TN 359,639 · FP 50,487 · FN 16,975 · TP 25,363 (F1 0.4292).
+The following results are from the original saved computational outputs, reproduced during the November 2026 verification.
 
-The ablation, pooled F1:
+### 2.1 BRFSS 2024: Baseline Comparison
 
-| Variant | Pooled F1 |
-| --- | --- |
+**Evaluation:** Five-fold mean metrics, decision threshold 0.50.
+
+**Source:** `verified_outputs/brfss/phase2_allmodels_allfeatures/master_results_phase2_allfeatures.csv`
+
+| Model | Precision | Recall | F1 | ROC-AUC | AUPRC |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| **Dual-Branch FT-Transformer** | 0.3359 | 0.5991 | **0.4294** | 0.8030 | 0.3659 |
+| Random Forest | 0.3318 | 0.5768 | 0.4212 | 0.8494 | 0.3730 |
+| Logistic Regression | 0.2453 | 0.7933 | 0.3747 | 0.8491 | 0.3799 |
+| LSTM | 0.2491 | 0.7597 | 0.3722 | 0.8420 | 0.3606 |
+| 1-D CNN | 0.2400 | 0.8108 | 0.3703 | 0.8505 | 0.3808 |
+| GRU | 0.2287 | 0.7973 | 0.3550 | 0.8373 | 0.3487 |
+| Autoencoder + LR | 0.2245 | 0.7337 | 0.3438 | 0.8087 | 0.2903 |
+| Decision Tree | 0.2170 | 0.6577 | 0.3263 | 0.7600 | 0.2637 |
+| Naive Bayes | 0.1862 | 0.7973 | 0.3019 | 0.7555 | 0.1925 |
+| LightGBM | 0.5572 | 0.1313 | 0.2126 | 0.8526 | 0.3831 |
+| Linear SVM | 0.5745 | 0.1144 | 0.1902 | 0.8483 | 0.3784 |
+| KNN | 0.6147 | 0.0090 | 0.0178 | 0.7774 | 0.2802 |
+
+The proposed model achieved the **highest five-fold mean F1-score** among the evaluated models at threshold 0.50. Other models achieved higher scores on certain individual metrics, including ROC-AUC and AUPRC.
+
+The complete comparison, including accuracy and balanced accuracy, is available in the source CSV.
+
+### 2.2 BRFSS: Pooled Evaluation and Ablation
+
+**Pooled out-of-fold confusion matrix (452,464 respondents):**
+
+| TN | FP | FN | TP | Pooled F1 |
+| ---: | ---: | ---: | ---: | ---: |
+| 359,639 | 50,487 | 16,975 | 25,363 | **0.4292** |
+
+**Ablation comparison:**
+
+| Configuration | Pooled F1 |
+| --- | ---: |
 | Recall branch only | 0.3781 |
 | Precision branch only | 0.3750 |
-| Simple branch average | 0.4310 |
-| GateNet only, no veto/rescue (FP 50,488) | 0.4292 |
-| GateNet + veto/rescue, final (FP 50,487) | 0.4292 |
+| Simple branch average | **0.4310** |
+| GateNet only | 0.4292 |
+| GateNet + veto/rescue | 0.4292 |
 
-**NHANES 2017–March 2020** (9,180 participants, 141 features). Proposed model pooled: TN 7,626 · FP 679 · FN 374 · TP 501, F1 0.4876. AUROC/AUPRC are 0.8062/0.4252 for the final output and 0.8736/0.4677 for the gate-only output.
+The simple-average configuration produced a slightly higher pooled F1 than the final GateNet configuration. The final veto/rescue rules changed one BRFSS false-positive decision at threshold 0.50.
 
-**Published values that differ from the saved outputs.** Ten of the 200 published values checked differ from the original saved outputs, including the Table 6 proposed-model row and Table 15 AUROC/AUPRC. The reproduction equals the saved outputs in every case. The full list is in `REPRODUCIBILITY.md` §5; it is recorded as found and the paper is not corrected here.
+### 2.3 NHANES: Independent Cohort Evaluation
 
-## 5. How to run
+The NHANES pipeline uses separate cohort-specific preprocessing, feature selection, training, and evaluation rather than transferring BRFSS-trained model weights.
 
-The verified runs used Windows 11, Python 3.12.10, PyTorch 2.9.1 + CUDA 12.8 and an NVIDIA RTX 5070 Ti Laptop GPU (12 GB); see `env/ENVIRONMENT.md`. The scripts use the GPU when PyTorch finds one; running on CPU was not tested. On a different GPU, driver or library build, results may differ in the last digits.
+**Pooled out-of-fold results (9,180 participants):**
 
-1. **Get the data:** follow `DATA.md`.
-   - Put `main_data_brfss_2024.XPT` in `data/brfss/` and the 18 NHANES `P_*.xpt` files in `data/nhanes/`.
-   - Alternatively set `HS_BRFSS_XPT` to the BRFSS file's location.
-2. **Create the environment and the run copies** (PowerShell, from this folder):
-   ```powershell
-   powershell -ExecutionPolicy Bypass -File .\00_setup_env.ps1      # .venv with the versions captured from .venv312; generates run_code\ for this folder
-   powershell -ExecutionPolicy Bypass -File .\00a_gpu_check.ps1     # optional: records GPU / driver / CUDA
-   ```
-   On Linux or macOS:
-   ```bash
-   python3.12 -m venv .venv && . .venv/bin/activate
-   pip install -r env/requirements.txt --extra-index-url https://download.pytorch.org/whl/cu128
-   python tools/check_env.py && python tools/make_run_copies.py --overwrite && python tools/verify_package.py
-   ```
-3. **Run the stages in order.** Each stage runs a pre-flight check first, asks for `YES`, logs everything to `logs/`, and then compares the new outputs with `verified_outputs/` (`reports/compare_stageN_*.md`) and with the published numbers (`reports/published_vs_reproduced_*.csv`).
+| TN | FP | FN | TP | Pooled F1 |
+| ---: | ---: | ---: | ---: | ---: |
+| 7,626 | 679 | 374 | 501 | **0.4876** |
 
-   | Stage | Command (Windows) | Time on the verified GPU |
-   | --- | --- | --- |
-   | 1 NHANES | `.\01_stage1_nhanes.ps1` | 3 min |
-   | 2 BRFSS Phase 1 + proposed model | `.\02_stage2_brfss_core.ps1` | 185 min |
-   | 3 BRFSS baselines | `.\03_stage3_brfss_baselines.ps1` | 72 min |
-   | 4 BRFSS analyses (no training) | `.\04_stage4_brfss_analysis.ps1` | < 1 min |
+| Prediction Output | AUROC | AUPRC |
+| --- | ---: | ---: |
+| Gate-only | 0.8736 | 0.4677 |
+| Final veto/rescue output | 0.8062 | 0.4252 |
 
-   - Add `-CheckOnly` to any stage script to run the pre-flight only.
-   - Without PowerShell, run `python tools/run_stage.py --stage N`, then `python tools/compare_outputs.py --stage N`.
-4. **Row-level prediction files.** These are not shipped (116 MB). Stages 2 and 3 regenerate them, and `python tools/verify_package.py --check_excluded` compares them by SHA-256 with the verified run (`manifests/excluded_files.sha256`).
+Gate-only and final NHANES outputs produced identical binary decisions at threshold 0.50, although their probability-ranking metrics differed.
 
-## 6. Layout
+### 2.4 Experimental Verification
 
+The original research scripts were rerun and compared against saved research outputs. Core feature-selection results, model predictions, confusion matrices, baseline results, and available analyses were reproduced, including exact matches.
+
+A separate comparison of 200 publication-reported numerical values identified 10 differences between printed manuscript values and saved experimental outputs. These are documented in [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md), while the original code and results remain preserved.
+
+## 3. Original Code and Reproducibility
+
+### 3.1 Repository Organisation
+
+| Location | Contents |
+| --- | --- |
+| `original_code/` | 19 original Python research scripts |
+| `run_code/` | 14 path-adjusted execution copies |
+| `verified_outputs/` | Verified experimental and analytical outputs |
+| `evidence/` | Execution reports, logs, and source provenance |
+| `env/` | Dependencies and environment specifications |
+| `manifests/` | SHA-256 hashes and source-file mappings |
+| `tools/` | Execution and verification utilities |
+
+The original code was preserved with its computational logic intact. Personal Windows user-folder paths were sanitised for distribution, and execution copies contain documented environment-specific path adjustments.
+
+### 3.2 Verified Environment
+
+The November 2026 verification used:
+
+- **OS:** Windows 11
+- **Python:** 3.12.10
+- **PyTorch:** 2.9.1 with CUDA 12.8
+- **GPU:** NVIDIA RTX 5070 Ti Laptop GPU (12 GB)
+- **Dependencies:** `env/requirements.txt`
+
+These dependency versions describe the November verification environment. See `env/ENVIRONMENT.md` for details.
+
+### 3.3 Dataset Preparation
+
+Follow [`DATA.md`](DATA.md) to obtain the datasets.
+
+Expected input locations:
+
+- BRFSS: `data/brfss/main_data_brfss_2024.XPT`
+- NHANES: 18 `P_*.xpt` files in `data/nhanes/`
+
+The BRFSS file can alternatively be specified through `HS_BRFSS_XPT`.
+
+Raw datasets are not distributed with the repository.
+
+### 3.4 Execution Instructions
+
+From the repository root, use PowerShell on a compatible Windows/NVIDIA environment:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\00_setup_env.ps1
+powershell -ExecutionPolicy Bypass -File .\00a_gpu_check.ps1
 ```
-├── README.md  CODE_WALKTHROUGH.md  REPRODUCIBILITY.md  CONTRIBUTION.md  DATA.md  PACKAGE_NOTES.md
-├── original_code/        19 original scripts (distribution copies)
-├── run_code/             14 path-only execution copies (+ _generated_for.json)
-├── PATH_CHANGES.diff     the 27 path lines changed for the verified runs
-├── docs/METHOD.md
-├── env/                  requirements.txt, ENVIRONMENT.md
-├── data/                 (empty) place the datasets here, see DATA.md
-├── runs/  logs/  reports/   (empty) new runs write here
-├── verified_outputs/     outputs of the verified November 2026 run
-├── evidence/             reports, logs, manifests and tools of the verified runs; package build checks
-├── manifests/            package checksums, distribution hashes, excluded-file hashes, sanitisation map
-├── tools/                runner, comparison, environment and package checks
-└── 00_setup_env.ps1  00a_gpu_check.ps1  01…04 stage scripts
+
+Run the experimental stages in order:
+
+| Stage | Command | Recorded Runtime |
+| --- | --- | --- |
+| 1. NHANES | `.\01_stage1_nhanes.ps1` | ~3 min |
+| 2. BRFSS feature selection and proposed model | `.\02_stage2_brfss_core.ps1` | ~185 min |
+| 3. BRFSS baseline models | `.\03_stage3_brfss_baselines.ps1` | ~72 min |
+| 4. BRFSS analyses | `.\04_stage4_brfss_analysis.ps1` | <1 min |
+
+Stage scripts support `-CheckOnly` for prerequisite inspection without a full run.
+
+The repository also provides Python stage-running and output-comparison utilities in `tools/`.
+
+### 3.5 Verification Evidence
+
+The core verification records are available in:
+
+- [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md)
+- `evidence/reports/FINAL_REPRODUCIBILITY_REPORT.md`
+- `evidence/manifests_verified_runs/`
+- `evidence/package_build/verification.md`
+
+Large BRFSS row-level prediction files are excluded from the repository but can be regenerated by the corresponding research stages. Excluded-file hashes are recorded in `manifests/excluded_files.sha256`.
+
+Selected NHANES prediction-level outputs are included in the archived verification materials.
+
+To check the integrity of the distributed package:
+
+```powershell
+python tools/verify_package.py
 ```
 
-## 7. Reproducibility evidence
+The latest reported verification passed for **223 manifest-listed files**, with zero integrity failures.
 
-- `evidence/reports/FINAL_REPRODUCIBILITY_REPORT.md` and `STAGE0`–`STAGE4` reports.
-- Comparison reports: `compare_stage*.md`, file by file against the original saved outputs.
-- `published_vs_reproduced_20261106_031053.csv`: 200 published values checked.
-- `evidence/logs/`: for every step, the command, working folder, start/end time, exit code, console output and environment snapshot.
-- `evidence/manifests_verified_runs/`: SHA-256 manifests of every output, of the copies made from the original project, and of the 277-file original-project baseline (unchanged after every stage).
-- `evidence/package_build/`: the checks run when this package was built.
-  - The distribution copies differ from the originals only in the user-folder path, with matching Python syntax trees after normalisation of the permitted path-string literals.
-  - The execution copies differ only in path strings, with matching Python syntax trees after normalisation of the permitted path-string literals.
-  - Regenerating the execution copies for the original folder reproduces the 14 files used in the verified runs byte for byte.
+## 4. Research Contributions and Citation
 
-## 8. Attribution
+The research was conducted by **Jahidul Islam, Dristi Datta, and Fowzia Akhter**.
 
-The research code in `original_code/` comes from the author's project folder, and it produced the results reported in the paper. The November 2026 reproduction automation, comparison tools, documentation and packaging were prepared with AI assistance (Claude, Anthropic) under the author's direction. The author ran every training stage on the author's own computer and reviewed each stage before the next began. See `CONTRIBUTION.md` for the contribution map and for points marked for the author's review.
+Jahidul Islam initiated the research idea and led the practical implementation and experimental development, with academic supervision and methodological guidance from Dr Dristi Datta and Dr Fowzia Akhter.
+
+For the detailed contribution map, development history, and attribution, see [`CONTRIBUTION.md`](CONTRIBUTION.md).
+
+### Publication
+
+Islam, J., Datta, D., & Akhter, F. (2026). Leakage-Safe Precision-Aware Dual-Branch FT-Transformer for Population-Scale Heart Disease Risk Prediction. *Sensors, 26*(11), 3417.
+
+**DOI:** https://doi.org/10.3390/s26113417
+
+### Repository Access
+
+This repository is maintained as a private research copy for academic review. Redistribution of research materials or third-party resources is subject to applicable permissions and licensing requirements.
+
+---
+
+**Dual-Branch FT-Transformer — Original Research Implementation, Experimental Results, and Reproducibility**
