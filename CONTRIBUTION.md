@@ -1,74 +1,239 @@
 
 # Research Contributions and Implementation Map
 
-This repository presents the research implementation and experimental materials supporting **“Leakage-Safe Precision-Aware Dual-Branch FT-Transformer for Population-Scale Heart Disease Risk Prediction”**, published in *Sensors* (2026), **26(11), 3417** ([DOI: 10.3390/s26113417](https://doi.org/10.3390/s26113417)). It brings together the original HeartSense Python scripts, available experimental outputs, and technical documentation so that supervisors and research collaborators can inspect the methods and follow the computational workflow.
+This repository presents the original research implementation and experimental materials supporting the peer-reviewed paper:
 
-The underlying model and experiments were developed during the original research project. The subsequent November 2026 work **organised, documented, and verified those existing materials** for academic review; it was not a newly developed implementation of the published method.
+**Leakage-Safe Precision-Aware Dual-Branch FT-Transformer for Population-Scale Heart Disease Risk Prediction**
 
-## 1. Original Research and Implementation
+**Publication:** *Sensors*, 2026, 26(11), 3417  
+**DOI:** https://doi.org/10.3390/s26113417
 
-**Jahidul Islam**, the paper's first author, initiated the HeartSense research idea, proposed the approach to his academic supervisors, and led its practical development and experimental evaluation. He directed the implementation process, executed the Python scripts, inspected model outputs, troubleshot errors, assessed experimental results, and determined the subsequent development and analysis steps.
+The proposed method is referred to throughout this documentation as the **Dual-Branch FT-Transformer**.
 
-The research implementation was developed **with coding assistance from Claude and ChatGPT**, under Jahidul's direction and technical review. This assistance supported the programming work; the research decisions, hands-on execution, evaluation, and interpretation described above were undertaken by Jahidul.
+The repository brings together the Python research scripts, model implementations, feature-selection procedures, baseline experiments, evaluation results, and technical documentation developed during the original research.
 
-The repository preserves **19 scripts from the original research project** in `original_code/`. The shared copies retain their research logic, with personal Windows user-folder paths sanitised for distribution; the changes are recorded in `manifests/sanitisation_map.csv` and `evidence/manifests_verified_runs/stage0_copies.json`.
+The research was initially developed under the working name *HeartSense*, which remains in some historical folder names and project artifacts.
 
-The `run_code/` directory provides **14 execution copies** with path adjustments for the verification workspace. These copies are organisational adaptations of the existing scripts, not new model implementations.
+The November 2026 repository preparation involved organising and documenting these existing research materials and independently checking their reproducibility. The underlying research implementation was already developed and used during the original study.
+
+## 1. Original Research and Technical Implementation
+
+### Research initiation and development
+
+**Jahidul Islam**, the first author of the published paper, initiated the original research idea and proposed it to his academic supervisors.
+
+Following discussions and methodological guidance from his supervisors, he led the practical development, experimental implementation, and evaluation of the proposed approach.
+
+His responsibilities included:
+
+- Developing and refining the research approach.
+- Directing the implementation of the proposed machine-learning architecture.
+- Preparing and processing the research datasets.
+- Implementing and evaluating feature-selection strategies.
+- Executing the model-training and validation experiments.
+- Examining model predictions and evaluation metrics.
+- Identifying implementation errors, troubleshooting problems, and refining the experimental workflow.
+- Conducting baseline comparisons and experimental analyses.
+- Interpreting the experimental findings and contributing to manuscript preparation.
+
+### Python implementation and coding assistance
+
+The Python research implementation was developed with coding assistance from **Claude and ChatGPT**, under Jahidul's direction and technical review.
+
+Jahidul personally executed the research scripts, examined the experimental results, investigated errors, evaluated model behaviour, and determined subsequent development and analysis steps.
+
+AI-assisted programming supported the implementation process, while the research direction, experimental decisions, practical execution, validation, and interpretation were managed by Jahidul in collaboration with his academic supervisors.
+
+### Original research scripts
+
+The repository preserves **19 Python scripts from the original research project**, located in:
+
+`original_code/`
+
+These scripts implement the research workflow used to develop and experimentally evaluate the proposed Dual-Branch FT-Transformer.
+
+The archived copies retain the original computational logic. Personal Windows user-directory paths were sanitised where necessary for repository distribution.
+
+The path adjustments are documented in:
+
+- `manifests/sanitisation_map.csv`
+- `evidence/manifests_verified_runs/stage0_copies.json`
+
+The repository also provides **14 execution copies** in `run_code/`, with environment-specific path adjustments to support independent execution and verification of the existing implementation.
 
 ## 2. Code and Experiment Contribution Map
 
-The following map identifies the main scripts and what they implement. It is intended to help readers inspect the actual research code and connect it to the methods and results described in the article.
+The following table identifies the principal research scripts, their implementation responsibilities, and their connection to the published methodology.
 
-| Research Area | Principal Files | Implementation and Experimental Role |
+| Research Area | Principal Python Files | Implementation and Experimental Contribution |
 | --- | --- | --- |
-| **Proposed Dual-Branch Model** | `original_code/brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py`, `original_code/nhanes_phase2_run_fttransformer_dualbranch_precbiased_gate.py` | PyTorch FT-Transformer components; recall- and precision-biased branches; GateNet training and inference; veto/rescue rules; data preprocessing, training, validation, early stopping, and model evaluation. |
-| **Feature Selection** | `original_code/brfss2024_phase1_feature_fusion_cache_builder.py`, `original_code/nhanes_phase1_feature_fusion_cache_builder.py` | Pearson correlation, TabNet mask importance, and HistGradientBoosting permutation-importance selection; within-fold fusion and construction of the shared Phase-2 feature set. |
-| **Baseline Comparisons** | `original_code/brfss2024_phase2_all_models_allfeatures_master.py`, `original_code/nhanes_baseline_comparison_models.py`, `original_code/update_master_table_add_experiment.py` | Classical, ensemble, and deep-learning baseline evaluations; cross-validation and training-fold resampling where applicable; NHANES comparisons; aggregation of model results. The executed BRFSS comparison comprises 11 baseline models. |
-| **Dataset Preparation** | `original_code/nhanes_merge_check.py`, `original_code/nhanes_cleaning_step1.py`, `original_code/nhanes_create_target.py`, `original_code/generate_dataset_summary.py` | NHANES module merging, cleaning and target construction, plus cohort and dataset summary statistics. |
-| **Evaluation and Figures** | `original_code/simple_Avarage_fusion.py`, `original_code/confusion_metrix_allmodel.py`, `original_code/FP/FN_bar_chart.py`, `original_code/plot_threshold_curve.py`, `original_code/heatmap.py`, `original_code/plot_calibration_brier_ece.py`, `original_code/nhanes_confusion_matrix_comparison_plot.py` | Confusion-matrix and error analysis, threshold analysis, calibration metrics and visualisations, and evaluation figures. Additional plotting material is documented in `CODE_WALKTHROUGH.md`. |
+| **Proposed Dual-Branch FT-Transformer** | `original_code/brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py`, `original_code/nhanes_phase2_run_fttransformer_dualbranch_precbiased_gate.py` | Implementation of the PyTorch FT-Transformer components, recall-biased and precision-biased branches, asymmetric training objectives, GateNet, veto/rescue decision rules, preprocessing, cross-validation, training, inference, and evaluation. |
+| **Feature Selection** | `original_code/brfss2024_phase1_feature_fusion_cache_builder.py`, `original_code/nhanes_phase1_feature_fusion_cache_builder.py` | Implementation of Pearson correlation, TabNet mask-importance selection, HistGradientBoosting permutation-importance selection, within-fold feature fusion, and construction of the shared Phase-2 feature set. |
+| **Baseline Model Comparisons** | `original_code/brfss2024_phase2_all_models_allfeatures_master.py`, `original_code/nhanes_baseline_comparison_models.py`, `original_code/update_master_table_add_experiment.py` | Evaluation of classical machine-learning, ensemble, and deep-learning baselines; cross-validation, training-fold resampling where applicable, NHANES baseline comparisons, and consolidated performance reporting. |
+| **Dataset Preparation** | `original_code/nhanes_merge_check.py`, `original_code/nhanes_cleaning_step1.py`, `original_code/nhanes_create_target.py`, `original_code/generate_dataset_summary.py` | NHANES data integration, cleaning, cardiovascular target construction, and dataset descriptive analysis. |
+| **Model Evaluation and Analysis** | `original_code/simple_Avarage_fusion.py`, `original_code/confusion_metrix_allmodel.py`, `original_code/FP/FN_bar_chart.py`, `original_code/plot_threshold_curve.py`, `original_code/heatmap.py`, `original_code/plot_calibration_brier_ece.py`, `original_code/nhanes_confusion_matrix_comparison_plot.py` | Confusion-matrix analysis, false-positive and false-negative analysis, threshold evaluation, calibration assessment, performance visualisation, and supporting manuscript figures. |
 
-For a code-first technical review, the BRFSS Phase-2 script is a useful starting point for understanding the architecture, asymmetric losses, GateNet, and training/evaluation flow.
+### Proposed model implementation
 
-`CODE_WALKTHROUGH.md` and `docs/METHOD.md` provide detailed implementation guidance.
+The core model scripts contain the principal components of the proposed architecture:
 
-## 3. Academic Supervision and Research Contributions
+1. FT-Transformer feature tokenisation and attention-based representation learning.
+2. Separately trained recall-oriented and precision-oriented prediction branches.
+3. Asymmetric loss functions for controlling the trade-off between sensitivity and precision.
+4. GateNet for combining branch predictions.
+5. Decision rules involving prediction bias, veto, and rescue mechanisms.
+6. Cross-validation, preprocessing, training, validation, and performance evaluation.
 
-**Dr Dristi Datta** and **Dr Fowzia Akhter** provided academic supervision, methodological guidance, feedback, and manuscript review.
+The code also implements deterministic seeding, mixed-precision training, inner validation, and early-stopping procedures.
 
-According to the implementation history supplied for this repository, they did not directly write or modify the Python research scripts. Their broader scholarly roles are recognised in the published article.
+### Feature-selection implementation
 
-This document explains the practical implementation and repository provenance. The article's formal **Author Contributions** statement remains the authoritative record for publication-level contributor roles.
+The Phase-1 scripts implement three complementary feature-selection approaches:
 
-## 4. Organisation and Verification of the Original Materials
+- Pearson correlation.
+- TabNet feature-mask importance.
+- HistGradientBoosting permutation importance with a lower-confidence-bound selection rule.
 
-In November 2026, the existing HeartSense research files were arranged into a structured, reviewable repository.
+The selectors operate on Phase-1 training folds, and the selected features are fused to produce the shared feature set used in Phase 2.
 
-Jahidul ran the verification stages on his computer, examined the outputs, and directed the checks. Claude and ChatGPT assisted with supporting tasks such as execution automation, environment checks, comparison utilities, documentation, and packaging.
+The exact cross-validation and shared-feature construction procedure is explained in `CODE_WALKTHROUGH.md` and `docs/METHOD.md`.
 
-The verification work checked the original saved feature selections, predictions, confusion matrices, baseline results, and related analysis outputs.
+### Baseline experiments
 
-Many results reproduced exactly, including byte-for-byte matches; `REPRODUCIBILITY.md` records the detailed comparisons, including differences between some saved outputs and numbers printed in the published article.
+The original experimental workflow includes **11 executed BRFSS baseline models** and NHANES baseline comparisons.
 
-The original research scripts and scientific results have been preserved rather than rewritten to match those printed values.
+These experiments provide comparative evaluation of the proposed method against conventional machine-learning, ensemble, and deep-learning approaches.
 
-### Repository Documentation
+The original benchmark scripts and saved results are preserved for technical inspection.
 
-The repository's documentation is organised to make these materials straightforward to inspect:
+## 3. Academic Collaboration and Supervision
 
-- **`README.md`** — Research overview, repository contents, and starting points.
-- **`CODE_WALKTHROUGH.md`** and **`docs/METHOD.md`** — Model implementation, feature-selection procedure, and execution flow.
-- **`REPRODUCIBILITY.md`** — Rerun evidence, output comparisons, environment information, and the scope of completed verification.
-- **`DATA.md`** — Dataset sources, preparation, and access instructions for data not distributed with the repository.
-- **`original_code/`**, **`run_code/`**, **`artifacts/`**, and **`evidence/`** — Research scripts, execution copies, results, and verification records.
+The published research was conducted by:
 
-For methodological precision, `CODE_WALKTHROUGH.md` explains that Phase-1 feature selections were combined across folds into the shared feature set subsequently used in Phase 2.
+- **Jahidul Islam** — First author.
+- **Dr Dristi Datta** — Co-author and academic supervisor.
+- **Dr Fowzia Akhter** — Co-author and academic supervisor.
 
-`REPRODUCIBILITY.md` identifies which analyses were rerun from the available research archive and documents any unavailable historical inputs.
+### Jahidul Islam
 
-These technical notes support an accurate reading of the implementation without changing the published work.
+Jahidul initiated the original research idea and led the practical Python implementation and experimental development.
+
+He directed the coding workflow, executed the experiments, investigated errors, analysed the results, and participated in preparing the research manuscript.
+
+### Dr Dristi Datta and Dr Fowzia Akhter
+
+Dr Dristi Datta and Dr Fowzia Akhter contributed academic supervision, methodological guidance, research feedback, and manuscript review.
+
+According to the project's implementation history, the supervisors did not directly write or modify the Python research scripts.
+
+Their broader scientific contributions are acknowledged in the published article.
+
+The journal's formal **Author Contributions** statement remains the authoritative record of publication-level responsibilities.
+
+## 4. Organisation and Reproducibility Verification
+
+Following publication, the existing research implementation and experimental materials were organised into a structured repository to facilitate technical inspection and independent review.
+
+This work was carried out in November 2026.
+
+### Organisation of existing research materials
+
+The repository preparation included:
+
+- Collecting and organising the original Python research scripts.
+- Preserving their computational logic.
+- Preparing path-adjusted execution copies where necessary.
+- Organising saved experimental outputs and analysis artifacts.
+- Documenting the research environment and software dependencies.
+- Preparing implementation walkthroughs and execution instructions.
+- Recording source-file provenance and integrity checks.
+
+These activities focused on improving the accessibility and traceability of the existing research implementation.
+
+### Reproducibility verification
+
+The original research scripts were subsequently rerun in a controlled environment to verify the available experimental outputs.
+
+The verification process included:
+
+- Dataset preparation and feature-selection outputs.
+- BRFSS and NHANES model evaluation.
+- Baseline model comparisons.
+- Prediction and confusion-matrix calculations.
+- Performance metrics and analytical outputs.
+- Available evaluation figures and supporting results.
+
+The verification reproduced core saved results, including exact matches for many outputs.
+
+Detailed comparisons, numerical precision differences, historical output variations, and the scope of completed reruns are documented in `REPRODUCIBILITY.md`.
+
+The original scientific implementation and saved experimental results were preserved throughout this process.
+
+### Verification and documentation assistance
+
+Jahidul personally ran the reproduction stages, examined the outputs, reviewed the verification findings, and directed the organisation of the research materials.
+
+Claude and ChatGPT assisted with the supporting automation, environment checks, comparison utilities, technical documentation, and repository preparation.
+
+The verification utilities and repository documentation complement the original research scripts and provide additional transparency for independent technical review.
+
+## 5. Repository Guide for Research Reviewers
+
+The repository is organised to help supervisors and research collaborators navigate the original implementation and supporting evidence.
+
+| Location | Purpose |
+| --- | --- |
+| `README.md` | Research overview, principal contributions, and repository navigation. |
+| `original_code/` | Original Python research implementation. |
+| `run_code/` | Path-adjusted execution copies of the research scripts. |
+| `CODE_WALKTHROUGH.md` | Detailed explanation of code components and implementation flow. |
+| `docs/METHOD.md` | Research methodology and computational procedures. |
+| `REPRODUCIBILITY.md` | Re-execution evidence, output verification, environment information, and comparison results. |
+| `DATA.md` | Dataset sources, preparation, and data-access instructions. |
+| `artifacts/` | Available experimental outputs and analysis materials. |
+| `evidence/` | Supporting verification records and research provenance. |
+| `manifests/` | File-integrity and source-mapping records. |
+
+### Suggested technical review sequence
+
+Readers who wish to inspect the core implementation can begin with:
+
+**1. Feature selection**
+
+`original_code/brfss2024_phase1_feature_fusion_cache_builder.py`
+
+**2. Proposed architecture and model training**
+
+`original_code/brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py`
+
+**3. Baseline evaluation**
+
+`original_code/brfss2024_phase2_all_models_allfeatures_master.py`
+
+**4. NHANES evaluation**
+
+`original_code/nhanes_phase2_run_fttransformer_dualbranch_precbiased_gate.py`
+
+**5. Reproducibility and experimental outputs**
+
+`REPRODUCIBILITY.md`
+
+For detailed code-level explanations, see `CODE_WALKTHROUGH.md`.
+
+## 6. Research Provenance and Documentation
+
+This repository provides an organised record of the Dual-Branch FT-Transformer research implementation, associated experiments, and available verification evidence.
+
+The distinction between the original research materials and the subsequent organisation and reproducibility work is maintained through the repository structure, source manifests, and technical documentation.
+
+The published article remains the authoritative reference for the reported research findings and formal author contributions.
+
+Detailed methodological information, including the Phase-1 shared-feature selection procedure, is provided in `docs/METHOD.md` and `CODE_WALKTHROUGH.md`.
+
+The available experimental evidence, comparisons with reported manuscript values, software environment, and execution requirements are documented in `REPRODUCIBILITY.md`.
 
 ---
 
-**Purpose of This Repository**
+## Purpose of This Repository
 
-To provide a clear, inspectable account of the **original HeartSense implementation, the experiments conducted, the available research evidence, and the later verification of those materials for academic review**.
+To provide researchers, academic supervisors, and collaborators with a clear and technically inspectable account of the **original Dual-Branch FT-Transformer implementation, experimental workflow, model evaluation, research contributions, and reproducibility evidence** supporting the published study.
