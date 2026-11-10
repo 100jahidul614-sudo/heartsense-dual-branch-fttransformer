@@ -123,7 +123,7 @@ The following results are from the original saved computational outputs, reprodu
 | Naive Bayes | 0.1862 | 0.7973 | 0.3019 | 0.7555 | 0.1925 |
 | LightGBM | 0.5572 | 0.1313 | 0.2126 | 0.8526 | 0.3831 |
 | Linear SVM | 0.5745 | 0.1144 | 0.1902 | 0.8483 | 0.3784 |
-| KNN | 0.6147 | 0.0090 | 0.0178 | 0.7774 | 0.2802 |
+| KNN | 0.6147 | 0.0090 | 0.0178 | 0.7774 | 0.2801 |
 
 The proposed model achieved the **highest five-fold mean F1-score** among the evaluated models at threshold 0.50. Other models achieved higher scores on certain individual metrics, including ROC-AUC and AUPRC.
 

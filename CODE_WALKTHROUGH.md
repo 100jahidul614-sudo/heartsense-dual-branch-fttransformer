@@ -174,7 +174,7 @@ x ∈ R^F (standardised) ──► tokenize: t_j = x_j · W_j + b_j      W, b �
 | Same settings | Seeds, preprocessing, feature selection, architecture and hyperparameters as in the scripts; the 47 pinned package versions describe the November 2026 verification environment: they were captured from the project's `.venv312` interpreter on 5 November 2026 and are not necessarily the versions used in the original research runs, which were not recorded; XGBoost/CatBoost left absent | `env/requirements.txt`, `evidence/logs/stage0_env/` |
 | Guarded runs | A pre-flight check per stage confirmed script hashes, inputs present, outputs absent (no overwrite), all paths inside the run folder, and the raw-data SHA-256. Every step was logged with command, timing, exit code, console output and environment | `tools/run_stage.py`, `evidence/logs/` |
 | Comparison | Each output written by the re-run was compared file by file with its original saved counterpart: CSV values and probability flips at 0.50, JSON contents, image bytes. Historical files that the current scripts do not write were recorded as reference-only and not regenerated (scope below) | `evidence/reports/compare_stage*.md` |
-| Published values | 200 printed values were checked against saved and reproduced outputs, and differences recorded as found | `evidence/reports/published_vs_reproduced_20261106_031053.csv`, `REPRODUCIBILITY.md` §5 |
+| Published values | 200 printed values were checked against saved and reproduced outputs, and differences recorded as found | `evidence/reports/published_vs_reproduced_20261106_031053.csv`, `REPRODUCIBILITY.md` §6 |
 
 **Outcome:**
 - Every trained model's out-of-fold predictions are bit-identical to the original saved outputs. That covers both proposed models, 11 BRFSS baselines (including the four PyTorch models) and 3 NHANES baselines, as well as the Phase-1 feature lists (same order) and all confusion matrices.
@@ -194,4 +194,4 @@ x ∈ R^F (standardised) ──► tokenize: t_j = x_j · W_j + b_j      W, b �
 - The scripts were path-sanitised, and the execution copies can be regenerated for any folder.
 - Build checks confirm that the 19 scripts differ from the originals only in the user-folder lines, with matching Python syntax trees after normalisation of the permitted path-string literals. Regenerating the execution copies for the original folder reproduces the 14 files used in the verified runs byte for byte (`evidence/package_build/verification.md`).
 
-**To re-run:** see README §5. Each stage ends with `tools/compare_outputs.py`, which compares the new run with `verified_outputs/`.
+**To re-run:** see README §3.4. Each stage ends with `tools/compare_outputs.py`, which compares the new run with `verified_outputs/`.
