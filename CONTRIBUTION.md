@@ -1,56 +1,39 @@
-# Contribution map and attribution
+Research Contributions and Implementation Map
+This repository presents the research implementation and experimental materials supporting “Leakage-Safe Precision-Aware Dual-Branch FT-Transformer for Population-Scale Heart Disease Risk Prediction”, published in Sensors (2026), 26(11), 3417 (DOI: 10.3390/s26113417). It brings together the original HeartSense Python scripts, available experimental outputs, and technical documentation so that supervisors and research collaborators can inspect the methods and follow the computational workflow.
 
-This document distinguishes the original research, the Python implementation, and the November 2026 reproducibility work. The account of individual contributions in Section 3 was confirmed by Jahidul Islam for this repository. The formal contribution declaration in the published paper remains the publication's authoritative record of manuscript authorship and associated roles.
+The underlying model and experiments were developed during the original research project. The subsequent November 2026 work organised, documented, and verified those existing materials for academic review; it was not a newly developed implementation of the published method.
+1. Original research and implementation
+Jahidul Islam, the paper's first author, initiated the HeartSense research idea, proposed the approach to his academic supervisors, and led its practical development and experimental evaluation. He directed the implementation process, executed the Python scripts, inspected model outputs, troubleshot errors, assessed experimental results, and determined the subsequent development and analysis steps.
 
-## 1. What is established by the evidence in this package
+The research implementation was developed with coding assistance from Claude and ChatGPT, under Jahidul's direction and technical review. This assistance supported the programming work; the research decisions, hands-on execution, evaluation, and interpretation described above were undertaken by Jahidul.
 
-- The 19 scripts in `original_code/` were collected from the HeartSense research project folder. The distributed copies preserve the research code, with only the personal Windows user-folder paths sanitised (`evidence/manifests_verified_runs/stage0_copies.json`, `manifests/sanitisation_map.csv`).
-- The research scripts were rerun in an isolated reproduction workspace. Core saved predictions, feature lists, confusion matrices and other outputs were reproduced, with byte-level matches and the limited rounding, metadata and historical-file differences documented in `REPRODUCIBILITY.md`.
-- The project corresponds to the peer-reviewed article by Jahidul Islam and co-authors in *Sensors* (2026), 26(11), 3417. Jahidul Islam is the first author. Publication authorship and the repository's implementation-history statement are related but distinct forms of attribution.
+The repository preserves 19 scripts from the original research project in original_code/. The shared copies retain their research logic, with personal Windows user-folder paths sanitised for distribution; the changes are recorded in manifests/sanitisation_map.csv and evidence/manifests_verified_runs/stage0_copies.json. The run_code/ directory provides 14 execution copies with path adjustments for the verification workspace. These copies are organisational adaptations of the existing scripts, not new model implementations.
+2. Code and experiment contribution map
+The following map identifies the main scripts and what they implement. It is intended to help readers inspect the actual research code and connect it to the methods and results described in the article.
+Research area	Principal files	Implementation and experimental role
+Proposed dual-branch model	original_code/brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py, original_code/nhanes_phase2_run_fttransformer_dualbranch_precbiased_gate.py	PyTorch FT-Transformer components; recall- and precision-biased branches; GateNet training and inference; veto/rescue rules; data preprocessing, training, validation, early stopping, and model evaluation.
+Feature selection	original_code/brfss2024_phase1_feature_fusion_cache_builder.py, original_code/nhanes_phase1_feature_fusion_cache_builder.py	Pearson correlation, TabNet mask importance, and HistGradientBoosting permutation-importance selection; within-fold fusion and construction of the shared Phase-2 feature set.
+Baseline comparisons	original_code/brfss2024_phase2_all_models_allfeatures_master.py, original_code/nhanes_baseline_comparison_models.py, original_code/update_master_table_add_experiment.py	Classical, ensemble, and deep-learning baseline evaluations; cross-validation and training-fold resampling where applicable; NHANES comparisons; aggregation of model results. The executed BRFSS comparison comprises 11 baseline models.
+Dataset preparation	original_code/nhanes_merge_check.py, original_code/nhanes_cleaning_step1.py, original_code/nhanes_create_target.py, original_code/generate_dataset_summary.py	NHANES module merging, cleaning and target construction, plus cohort and dataset summary statistics.
+Evaluation and figures	original_code/simple_Avarage_fusion.py, original_code/confusion_metrix_allmodel.py, original_code/FP/FN_bar_chart.py, original_code/plot_threshold_curve.py, original_code/heatmap.py, original_code/plot_calibration_brier_ece.py, original_code/nhanes_confusion_matrix_comparison_plot.py	Confusion-matrix and error analysis, threshold analysis, calibration metrics and visualisations, and evaluation figures. Additional plotting material is documented in CODE_WALKTHROUGH.md.
 
-## 2. Contribution map: what each part of the code implements
 
-This table describes the **functionality contained in each script**. It does not imply that any individual manually wrote every line of code.
+For a code-first technical review, the BRFSS Phase-2 script is a useful starting point for understanding the architecture, asymmetric losses, GateNet, and training/evaluation flow. CODE_WALKTHROUGH.md and docs/METHOD.md provide detailed implementation guidance.
+3. Academic supervision and research contributions
+Dr Dristi Datta and Dr Fowzia Akhter provided academic supervision, methodological guidance, feedback, and manuscript review. According to the implementation history supplied for this repository, they did not directly write or modify the Python research scripts. Their broader scholarly roles are recognised in the published article.
 
-| Area | Files (`original_code/`) | Lines | What the code implements |
-| --- | --- | --- | --- |
-| Proposed model | `brfss2024_phase2_run_fttransformer_dualbranch_precbiased_gate.py`, `nhanes_phase2_run_fttransformer_dualbranch_precbiased_gate.py` | 1,072 / 1,498 | An FT-Transformer built from PyTorch components: feature tokenizer, pre-norm attention blocks and pooled MLP head. Two separately trained branches use asymmetric losses (recall-biased and precision-biased with `alpha_pos` and negative weighting). The scripts implement GateNet training and inference, its bias, veto/rescue rules, fold-wise imputation and scaling, inner validation, mixed-precision training, AUPRC-based early stopping, deterministic seeding and ablation evaluation. |
-| Feature selection | `brfss2024_phase1_feature_fusion_cache_builder.py`, `nhanes_phase1_feature_fusion_cache_builder.py` | 581 / 695 | Three selectors (Pearson correlation, TabNet mask importance, HistGradientBoosting permutation importance with a lower-confidence-bound rule) operate on each Phase-1 CV training fold. Their selections are fused within folds and subsequently combined into a shared union used for Phase 2. As explained in `CODE_WALKTHROUGH.md` §1.3, this does **not** preserve strict outer-fold-independent feature selection. |
-| Baseline benchmark | `brfss2024_phase2_all_models_allfeatures_master.py`, `nhanes_baseline_comparison_models.py`, `update_master_table_add_experiment.py` | 980 / 603 / 263 | Eleven executed BRFSS baselines spanning classical, ensemble and PyTorch deep-learning models; fold-wise evaluation, including SMOTE within training folds where used, and calibrated linear SVM probabilities. NHANES baseline comparisons and consolidated results tables are also included. XGBoost and CatBoost were defined but not executed in the original baseline run. |
-| Data engineering | `nhanes_merge_check.py`, `nhanes_cleaning_step1.py`, `nhanes_create_target.py`, `generate_dataset_summary.py` | 50 / 29 / 72 / 132 | Merging 18 NHANES modules, missingness filtering, cardiovascular target construction and BRFSS cohort statistics (Table 3). |
-| Analysis and figures | `simple_Avarage_fusion.py`, `confusion_metrix_allmodel.py`, `FP/FN_bar_chart.py` (executed as `run_code/FN_bar_chart.py`), `plot_threshold_curve.py`, `heatmap.py`, `plot_calibration_brier_ece.py`, `nhanes_confusion_matrix_comparison_plot.py`, `artifacts/…/plot_grouped_metrics.py` | 31–273 each | Confusion-matrix and error analysis, threshold curves, veto/rescue sensitivity, cross-fitted calibration (Brier score and ECE), and manuscript figures. Some figure scripts contain fixed numerical values; those are identified and checked in `CODE_WALKTHROUGH.md`. |
+This document explains the practical implementation and repository provenance. The article's formal Author Contributions statement remains the authoritative record for publication-level contributor roles.
+4. Organisation and verification of the original materials
+In November 2026, the existing HeartSense research files were arranged into a structured, reviewable repository. Jahidul ran the verification stages on his computer, examined the outputs, and directed the checks. Claude and ChatGPT assisted with supporting tasks such as execution automation, environment checks, comparison utilities, documentation, and packaging.
 
-For an initial technical review, start with the BRFSS Phase-2 script: lines 203–320 (architecture and losses), 399–480 and 582–630 (GateNet and veto/rescue), and 739–860 (cross-validation and training flow). `CODE_WALKTHROUGH.md` and `docs/METHOD.md` give further function- and line-level explanations.
+The verification work checked the original saved feature selections, predictions, confusion matrices, baseline results, and related analysis outputs. Many results reproduced exactly, including byte-for-byte matches; REPRODUCIBILITY.md records the detailed comparisons, including differences between some saved outputs and numbers printed in the published article. The original research scripts and scientific results have been preserved rather than rewritten to match those printed values.
 
-## 3. Research contributions, implementation process and AI assistance
+The repository's documentation is organised to make these materials straightforward to inspect:
+- README.md — research overview, repository contents, and starting points.
+- CODE_WALKTHROUGH.md and docs/METHOD.md — model implementation, feature-selection procedure, and execution flow.
+- REPRODUCIBILITY.md — rerun evidence, output comparisons, environment information, and the scope of completed verification.
+- DATA.md — dataset sources, preparation, and access instructions for data not distributed with the repository.
+- original_code/, run_code/, artifacts/, and evidence/ — research scripts, execution copies, results, and verification records.
+For methodological precision, CODE_WALKTHROUGH.md explains that Phase-1 feature selections were combined across folds into the shared feature set subsequently used in Phase 2. REPRODUCIBILITY.md identifies which analyses were rerun from the available research archive and documents any unavailable historical inputs. These technical notes support an accurate reading of the implementation without changing the published work.
 
-### Jahidul Islam — research initiation and technical development
-
-Jahidul Islam independently conceived the initial HeartSense research idea and proposed it to his supervisors. After discussing the approach and receiving their approval, he led the practical development and experimental implementation of the project.
-
-The Python research implementation was developed **with coding assistance from Claude and ChatGPT**. Jahidul directed the development, personally executed the scripts, examined experimental outputs, identified errors, troubleshot problems and decided how to proceed with subsequent iterations. This describes substantive hands-on implementation and experimental responsibility; it does **not** claim that he manually authored every line or that AI-generated code was absent.
-
-### Academic supervisors — research guidance and manuscript development
-
-Dr Dristi Datta and Dr Fowzia Akhter provided academic supervision, research and methodological guidance, feedback and manuscript review. According to Jahidul's account of the implementation process, neither supervisor directly wrote or modified the project's Python scripts. Their wider scholarly contributions and formal publication roles are acknowledged in the published article.
-
-### November 2026 reproducibility and repository preparation
-
-Jahidul personally ran the reproduction stages on his computer, inspected their results and directed the process. Reproduction automation, environment checks, comparison utilities, technical reports, code walkthroughs and repository packaging were developed **with AI assistance**, including Claude and ChatGPT, under his direction and review. These November 2026 materials are separate from the original research-code implementation and are identified in `tools/`, `evidence/`, `docs/` and the repository documentation.
-
-### Attribution boundaries
-
-- The original scripts are presented as the research project's implementation, **not** as code written entirely by hand by a single person.
-- Use of AI coding assistance is disclosed; no claim is made that AI tools independently conceived, approved or conducted the research.
-- The code-function map in Section 2 is a guide to implementation, not a claim of line-by-line authorship.
-- A Git commit identifies who made that repository commit; it does not establish who originally authored each file.
-- This document supplements, and does not replace or amend, the formal author-contribution statement in the published article.
-
-## 4. What this package does not claim
-
-- It does not independently certify every methodological or numerical claim in the published paper. Where published numbers differ from the saved and reproduced outputs, the differences are recorded in `REPRODUCIBILITY.md` §5 without changing the paper.
-- It does not claim strict outer-fold-independent feature selection: the Phase-1 selections are combined across folds before Phase-2 evaluation.
-- It does not include the underlying raw datasets or the full row-level BRFSS prediction files; data sources, excluded-file hashes and regeneration instructions are documented elsewhere in the repository.
-- It does not establish that a complete fresh training run will work on every computer, operating system or CPU-only environment.
-- It does not include all scripts for paper elements that were not rerun in this reproduction, including SHAP (Figs 13–14), Table 13 statistics, Table 7 paired tests (the expected input file was unavailable in the project), Table 5 one-hot and Table 11 imputation ablations.
-- It does not grant a public software licence or establish permission to redistribute any third-party material. Repository access and wider distribution should be handled separately from this attribution statement.
+Purpose of this repository: to provide a clear, inspectable account of the original HeartSense implementation, the experiments conducted, the available research evidence, and the later verification of those materials for academic review.
