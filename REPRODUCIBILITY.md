@@ -1,85 +1,273 @@
-# Reproducibility record
 
-The original scripts were re-run on 5–6 November 2026, with seeds, preprocessing, feature selection, architecture and hyperparameters unchanged. The run used a separate folder on the author's computer; the original project was only read, and all 277 of its files were confirmed unchanged after every stage. Only file paths were changed (27 lines in 14 execution copies; `PATH_CHANGES.diff`).
+# Dual-Branch FT-Transformer — Reproducibility Record
 
-The full report is `evidence/reports/FINAL_REPRODUCIBILITY_REPORT.md`; the stage reports are `STAGE0`–`STAGE4`. Paths in those reports are relative to the reproduction folder. In this package, its `reports/`, `logs/` and `manifests/` folders are under `evidence/`, and `runs/` is `verified_outputs/` (see `evidence/README.md`).
+This document records the independent re-execution and verification of the original Python research implementation supporting:
 
-## 1. Result
+**Leakage-Safe Precision-Aware Dual-Branch FT-Transformer for Population-Scale Heart Disease Risk Prediction**
 
-**Reproduced exactly.** Every trained model's out-of-fold predictions are bit-identical to the original saved outputs: the proposed model on BRFSS and NHANES, 11 BRFSS baselines and 3 NHANES baselines. So are the Phase-1 feature lists (181 BRFSS / 141 NHANES, same order) and all confusion matrices.
+J. Islam, D. Datta, and F. Akhter. *Sensors*, 2026, 26(11), 3417.  
+https://doi.org/10.3390/s26113417
 
-| Stage | Content | Run time | Original output files compared |
-| --- | --- | --- | --- |
-| 1 | NHANES cohort, Phase 1, proposed model, baselines, Fig 15 | 2.9 min | 17 identical; 2 numerically identical (stored paths only); 2 earlier Fig 15 drafts not written by the current script |
-| 2 | BRFSS Phase 1, Table 3, proposed model + ablation | 185.0 min | 11 identical; 2 numerically identical (paths only); 3 exploratory files stored in the output folder |
-| 3 | 11 BRFSS baselines, master table, Fig 4 | 71.9 min | 34 identical; master table within 5×10⁻¹⁰ (the saved file is rounded to 9 decimals); 1 radar plot from a script outside the pipeline |
-| 4 | Error, threshold, sensitivity and calibration analyses | 0.4 min | 9 identical; calibration table within 2.4×10⁻¹² (computed originally from a January copy of the predictions, max difference 1.4×10⁻⁷); 1 PDF differing only in its creation date (0 differing pixels) |
+## 1. Reproducibility Overview
 
-**Overall:** 84 original output files were compared. 71 are identical, 6 numerically equal, 1 differs in metadata only, and 6 are files the current scripts do not write. No genuine differences.
+The original research scripts were re-executed on **5–6 November 2026** to verify the experimental results saved during the research project.
 
-## 2. Environment
+The verification used the existing computational implementation, preserving its feature-selection procedures, model architectures, training objectives, hyperparameters, random seeds, and evaluation methodology.
 
-The run used Windows 11, Python 3.12.10, PyTorch 2.9.1+cu128 (cuDNN 9.10.02) and an NVIDIA RTX 5070 Ti Laptop GPU with driver 591.91, with the 47 pinned versions captured from the project's `.venv312` interpreter during the reproduction (5 November 2026); the versions installed for the original January 2026 experiments were not recorded (`env/ENVIRONMENT.md`). XGBoost and CatBoost are absent, as in the original environment.
+A separate execution workspace was used so that the original research project remained unchanged.
 
-## 3. What was changed to run the code
+**Key verification outcomes:**
 
-- Only path string literals, in 14 execution copies. Five scripts take every path as a command-line argument and ran from unchanged copies.
-- One mapping is not a pure folder move. Three Stage 4 scripts (`confusion_metrix_allmodel.py`, `plot_threshold_curve.py`, `plot_calibration_brier_ece.py`) read a January 2026 copy of the proposed model's out-of-fold file. They were pointed to the reproduced selected-features run of the same script, whose predictions agree with the January copy to 1.4×10⁻⁷, with no decision change at any threshold used.
+- The proposed model's out-of-fold predictions on BRFSS and NHANES reproduced byte for byte.
+- Out-of-fold predictions from all 11 executed BRFSS baseline models and three NHANES baselines reproduced byte for byte.
+- The BRFSS and NHANES Phase-1 feature lists reproduced exactly, including their feature order.
+- The saved confusion matrices reproduced exactly.
+- The available core analytical outputs were reproduced or numerically matched within the documented precision differences.
+- All 277 files in the original research project remained unchanged, as verified against the recorded SHA-256 baseline after each stage.
 
-## 4. Key verified numbers
+The original implementation is preserved in `original_code/`, with path-adjusted execution copies in `run_code/`.
 
-| | Value |
+The complete verification evidence is available in:
+
+`evidence/reports/FINAL_REPRODUCIBILITY_REPORT.md`
+
+## 2. Experimental Verification Summary
+
+The verification was organised into four execution stages following the initial environment and source-integrity checks.
+
+| Stage | Original Research Components | Recorded Runtime | Verification Outcome |
+| --- | --- | ---: | --- |
+| **1 — NHANES** | Cohort preparation, feature selection, proposed model, baselines, Figure 15 | 2.9 min | Core predictions, feature selections, and confusion matrices reproduced |
+| **2 — BRFSS Core** | Feature selection, cohort statistics, proposed model, ablations | 185.0 min | Original feature lists, predictions, and model results reproduced |
+| **3 — BRFSS Baselines** | Eleven baseline models, master results table, Figure 4 | 71.9 min | Model predictions and fold-level metrics reproduced |
+| **4 — Supporting Analyses** | Error analysis, threshold curves, sensitivity, and calibration | 0.4 min | Available analytical outputs reproduced within documented precision and metadata differences |
+
+### File-level verification
+
+A total of **84 original saved output files** were examined.
+
+| Comparison Category | Files |
+| --- | ---: |
+| Byte-identical | 71 |
+| Numerically equivalent, with documented formatting or precision differences | 6 |
+| Identical visual content, with PDF metadata difference | 1 |
+| Historical reference artifacts not generated by the executed pipeline | 6 |
+| **Total examined** | **84** |
+
+Of these, 78 had corresponding outputs from the executed workflow. The six historical reference artifacts included earlier figure drafts and exploratory outputs not produced by the scripts in the verified execution pipeline.
+
+The detailed file-by-file evidence is preserved in `evidence/reports/compare_stage*.md` and the accompanying CSV records.
+
+## 3. Original Code and Execution Integrity
+
+The repository contains **19 original research scripts** collected from the original project.
+
+The verification used:
+
+- Five scripts executed with their existing command-line arguments.
+- Fourteen execution copies with environment-specific path adjustments.
+- Twenty-seven path-line modifications across those execution copies.
+
+The model implementation, scientific calculations, preprocessing procedures, random seeds, and hyperparameters were not rewritten for the reproduction.
+
+The permitted path adjustments are recorded in:
+
+- `PATH_CHANGES.diff`
+- `manifests/sanitisation_map.csv`
+- `evidence/manifests_verified_runs/stage0_copies.json`
+
+Source-code comparisons, including Python syntax-tree checks after normalising the permitted path-string changes, support equivalence between the original scripts and the execution copies.
+
+### Historical Stage 4 input mapping
+
+Three analysis scripts originally referenced a January 2026 copy of the proposed model's out-of-fold predictions:
+
+- `confusion_metrix_allmodel.py`
+- `plot_threshold_curve.py`
+- `plot_calibration_brier_ece.py`
+
+For the November verification, these scripts were directed to the reproduced selected-features prediction file generated during Stage 2.
+
+The two prediction files differed by at most `1.4 × 10⁻⁷`, with no binary decision changes at the evaluated thresholds.
+
+The calibration-table differences arising from this mapping were at most `2.4 × 10⁻¹²`.
+
+These details are recorded in the stage reports and comparison evidence.
+
+## 4. Verified Execution Environment
+
+The November 2026 verification was completed using the following environment.
+
+| Component | Configuration |
 | --- | --- |
-| BRFSS proposed model, 5-fold mean | F1 0.4294, precision 0.3359, recall 0.5991, balanced accuracy 0.7380, ROC-AUC 0.8030, PR-AUC 0.3659 |
-| BRFSS proposed model, pooled at 0.50 | TN 359,639 / FP 50,487 / FN 16,975 / TP 25,363 (F1 0.4292) |
-| BRFSS 3-model simple average | FP 37,835 / FN 20,464, F1 0.4287 |
-| BRFSS calibration, Brier / ECE | raw 0.0944 / 0.1027; Platt 0.0696 / 0.0041; isotonic 0.0695 / 0.0006 |
-| NHANES proposed model, pooled | TN 7,626 / FP 679 / FN 374 / TP 501, F1 0.4876 |
-| NHANES AUROC / AUPRC | final output 0.8062 / 0.4252; gate-only output 0.8736 / 0.4677 |
+| Operating system | Windows 11 |
+| Python | 3.12.10 |
+| PyTorch | 2.9.1+cu128 |
+| CUDA build | 12.8 |
+| cuDNN | 9.10.02 |
+| GPU | NVIDIA RTX 5070 Ti Laptop GPU, 12 GB |
+| NVIDIA driver | 591.91 |
+| Dependency specification | `env/requirements.txt` |
 
-## 5. Published values vs the original saved outputs (recorded as found; the paper is not corrected here)
+The dependency specification contains 47 pinned package versions captured from the project's `.venv312` environment on 5 November 2026.
 
-Of 200 published values checked:
-- 183 equal the original saved outputs after rounding;
-- 7 equal them only when truncated rather than rounded (recall 0.59 in the abstract and Table 6, Table 6 balanced accuracy 0.73, Table 9 LightGBM F1 0.212, and three Table 12 calibration values);
-- 10 differ.
+These versions document the verified execution environment; a complete dependency snapshot from the original January 2026 experiments was not available.
 
-The reproduction equals the saved outputs in all 200 cases.
+XGBoost and CatBoost were absent from the original baseline environment and were not included in the verified baseline execution.
 
-| Paper element | Published | Original saved output = reproduced | Note |
-| --- | --- | --- | --- |
-| Abstract PR-AUC | 0.38 | 0.3659 (fold mean) | 0.3632 pooled |
-| Table 6, proposed: accuracy | 0.86 | 0.8509 | |
-| Table 6, proposed: ROC-AUC | 0.79 | 0.8030 | |
-| Table 6, proposed: PR-AUC | 0.38 | 0.3659 | |
-| Table 6, proposed: precision | 0.35 | 0.3359 | |
-| Table 10, final model: F1 | 0.430 | 0.4292 (pooled) | fold mean 0.4294 |
-| Table 10, final model: precision | 0.349 | 0.3344 (pooled) | |
-| Table 15, proposed: AUROC | 0.8736 | 0.8062 | the published value equals the saved gate-only row |
-| Table 15, proposed: AUPRC | 0.4677 | 0.4252 | the published value equals the saved gate-only row |
-| Table 15, Simple Avg: balanced accuracy | 0.7716 | 0.7706 | |
+For full hardware, dependency, and environment details, see:
 
-Full table: `evidence/reports/published_vs_reproduced_20261106_031053.csv`.
+`env/ENVIRONMENT.md`
 
-## 6. Not covered by this reproduction
+## 5. Key Reproduced Experimental Results
 
-| Paper element | Reason |
+The following results match the original saved computational outputs.
+
+### BRFSS 2024 — Proposed Model
+
+| Metric | Reproduced Value |
+| --- | ---: |
+| Five-fold mean accuracy | 0.8509 |
+| Five-fold mean balanced accuracy | 0.7380 |
+| Five-fold mean precision | 0.3359 |
+| Five-fold mean recall | 0.5991 |
+| Five-fold mean F1 | **0.4294** |
+| Five-fold mean ROC-AUC | 0.8030 |
+| Five-fold mean AUPRC | 0.3659 |
+
+**Pooled out-of-fold confusion matrix:**
+
+| TN | FP | FN | TP | Pooled F1 |
+| ---: | ---: | ---: | ---: | ---: |
+| 359,639 | 50,487 | 16,975 | 25,363 | **0.4292** |
+
+### BRFSS — Additional Analyses
+
+The three-model simple-average ensemble of LightGBM, Random Forest, and CNN1D produced:
+
+- False positives: 37,835
+- False negatives: 20,464
+- F1-score: 0.4287
+
+This ensemble is distinct from the simple averaging of the proposed model's recall and precision branches.
+
+The reproduced calibration results were:
+
+| Calibration | Brier Score | ECE |
+| --- | ---: | ---: |
+| Raw | 0.0944 | 0.1027 |
+| Platt | 0.0696 | 0.0041 |
+| Isotonic | 0.0695 | 0.0006 |
+
+### NHANES — Proposed Model
+
+The independently trained NHANES evaluation pipeline produced the following pooled results.
+
+| TN | FP | FN | TP | Pooled F1 |
+| ---: | ---: | ---: | ---: | ---: |
+| 7,626 | 679 | 374 | 501 | **0.4876** |
+
+| Prediction Configuration | AUROC | AUPRC |
+| --- | ---: | ---: |
+| Gate-only | 0.8736 | 0.4677 |
+| Final veto/rescue output | 0.8062 | 0.4252 |
+
+The gate-only and final NHANES outputs produced identical binary classifications at threshold 0.50.
+
+The NHANES evaluation involved cohort-specific preprocessing, feature selection, training, and evaluation; it was not a direct transfer of BRFSS-trained model weights.
+
+## 6. Comparison with Published Manuscript Values
+
+The verification also compared **200 numerical values reported in the published manuscript** against the original saved computational outputs.
+
+| Comparison Result | Values |
+| --- | ---: |
+| Matching after rounding | 183 |
+| Matching when truncated rather than rounded | 7 |
+| Different from the original saved outputs | 10 |
+| **Total checked** | **200** |
+
+The November rerun reproduced the saved computational values, including the values associated with the documented publication differences.
+
+### Recorded numerical differences
+
+| Manuscript Element | Published Value | Original Saved / Reproduced Value |
+| --- | ---: | ---: |
+| Abstract — PR-AUC | 0.38 | 0.3659 (five-fold mean) |
+| Table 6 — Proposed accuracy | 0.86 | 0.8509 |
+| Table 6 — Proposed ROC-AUC | 0.79 | 0.8030 |
+| Table 6 — Proposed PR-AUC | 0.38 | 0.3659 |
+| Table 6 — Proposed precision | 0.35 | 0.3359 |
+| Table 10 — Final-model F1 | 0.430 | 0.4292 (pooled) |
+| Table 10 — Final-model precision | 0.349 | 0.3344 (pooled) |
+| Table 15 — Proposed AUROC | 0.8736 | 0.8062 (final output) |
+| Table 15 — Proposed AUPRC | 0.4677 | 0.4252 (final output) |
+| Table 15 — Simple Avg balanced accuracy | 0.7716 | 0.7706 |
+
+For Table 15, the published proposed-model AUROC and AUPRC correspond to the saved gate-only results rather than the final veto/rescue probability output.
+
+Seven additional printed values agree with the saved results when truncated instead of rounded.
+
+The complete comparison, including the underlying precision and aggregation details, is available in:
+
+`evidence/reports/published_vs_reproduced_20261106_031053.csv`
+
+These differences are recorded as part of the original research provenance. The published manuscript, original computational scripts, and archived experimental outputs have not been altered.
+
+## 7. Verification Scope and Supporting Analyses
+
+The November rerun focused on the principal computational experiments and the available supporting analytical workflow.
+
+Several supplementary manuscript elements were retained in the historical research record but were outside the completed rerun.
+
+| Manuscript Element | Verification Status |
 | --- | --- |
-| Table 5 (numeric vs one-hot), Table 11 (imputation ablation) | Supplementary ablations; not re-run |
-| SHAP (Figs 13–14), Table 13 statistics | Post-hoc analyses with a surrogate model; not re-run |
-| Table 7 paired tests | The input file the original script expects does not exist in the project, so it cannot run as set up |
+| Table 5 — Numeric versus one-hot encoding | Supplementary ablation not rerun |
+| Table 11 — Imputation ablation | Supplementary ablation not rerun |
+| Figures 13–14 — SHAP analysis | Surrogate-model post-hoc analysis not rerun |
+| Table 13 — Supporting statistics | Not rerun |
+| Table 7 — Paired statistical tests | Original script expected an input file unavailable in the project archive |
 
-## 7. Evidence
+The completed rerun therefore verifies the original saved results for the executed pipeline, while the full manuscript contains additional analyses outside that verification scope.
 
-| Evidence | Location |
+The exact feature-selection procedure—including the shared union across Phase-1 folds—is documented in `CODE_WALKTHROUGH.md` and `docs/METHOD.md`.
+
+## 8. Evidence and Independent Verification
+
+| Evidence | Repository Location |
 | --- | --- |
-| Per-step command, working folder, start/end time, exit code and console output, plus an environment snapshot | `evidence/logs/stage1_*`–`stage4_*` |
-| File-by-file comparisons | `evidence/reports/compare_stage*.md` / `.csv` |
-| SHA-256 manifests of every output, of the copies made from the original project, and of the original-project baseline | `evidence/manifests_verified_runs/` |
-| Exact tool versions used for the verified runs | `evidence/tools_as_run/` |
-| Checks made when this package was built | `evidence/package_build/` |
+| Complete reproducibility report | `evidence/reports/FINAL_REPRODUCIBILITY_REPORT.md` |
+| Stage 0–4 reports | `evidence/reports/` |
+| Execution commands, timings, environment, and console logs | `evidence/logs/` |
+| File-by-file output comparisons | `evidence/reports/compare_stage*.md` and `.csv` |
+| Original-project and execution-output SHA-256 records | `evidence/manifests_verified_runs/` |
+| Exact verification tools used | `evidence/tools_as_run/` |
+| Repository package-integrity checks | `evidence/package_build/` |
+| Dataset sources and expected files | `DATA.md` |
 
-The package-build checks confirm three things:
-- the distribution copies differ from the originals only in the user-folder path, with matching Python syntax trees after normalisation of the permitted path-string literals;
-- the execution copies differ only in path strings, with matching Python syntax trees after normalisation of the permitted path-string literals;
-- regenerating the execution copies reproduces those used in the runs byte for byte.
+### Re-running the computational workflow
+
+The original research pipeline can be rerun using the instructions in `README.md` and `DATA.md`.
+
+The repository includes:
+
+- Environment setup and checking utilities.
+- Path-adjusted execution copies of the research scripts.
+- Stage-specific PowerShell execution scripts.
+- Output comparison utilities.
+- Archived verified results.
+- SHA-256 file-integrity manifests.
+
+To verify the repository package files, execute from the repository root:
+
+```powershell
+python tools/verify_package.py
+```
+
+The latest confirmed package check completed successfully against **223 manifest-listed files**, with zero failures.
+
+Package-integrity verification confirms that listed files match their recorded hashes. The stage reports, saved outputs, and comparison records provide the evidence for computational reproducibility.
+
+---
+
+**Verification summary:** The November 2026 reruns reproduced the original saved predictions, feature selections, confusion matrices, and principal model and baseline results. The repository preserves the original implementation and provides the evidence necessary to inspect the completed verification, its numerical comparisons, and its scope.
